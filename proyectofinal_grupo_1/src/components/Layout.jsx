@@ -7,7 +7,7 @@ function Layout(){
         <header>
         <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
         <Container>
-            <Navbar.Brand href="/"> <img src="/images/logo2.png" alt="Logo" width="45" height="45" className="d-inline-block align-top"/> <span className="ms-2 fs-3">Grupo 1</span></Navbar.Brand>
+            <Navbar.Brand href="/"> <img src="/images/logo2.png" alt="Logo" width="42" height="43" className="d-inline-block align-top"/> <span className="fs-4">GRUPO 1</span></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

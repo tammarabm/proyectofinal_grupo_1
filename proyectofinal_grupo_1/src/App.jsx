@@ -10,7 +10,7 @@ function App() {
 
   //<div className='container'></div>    Si pongo esto en el return la pagina no se ve completa
   return (
-      <div className='container'>
+      
         <Routes>
           <Route path="/" element ={ <Layout/> }>
             <Route index element = { <Home/>} />
@@ -18,7 +18,7 @@ function App() {
             <Route path="*" element ={ <ErrorPage/> }/>
           </Route>
         </Routes>
-      </div>
+      
 
       
   )
