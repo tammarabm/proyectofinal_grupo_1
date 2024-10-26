@@ -14,9 +14,10 @@ function Layout(){
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/aboutUs">About Us</Nav.Link>
                 <NavDropdown title="Más" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Juego Phaser</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2"> React </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.1">Indice de Masa Corporal</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Juego Phaser</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.4"> Desafio Matemático </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                     Separated link
