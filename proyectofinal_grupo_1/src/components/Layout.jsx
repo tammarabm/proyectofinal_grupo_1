@@ -17,7 +17,7 @@ function Layout(){
                 <NavDropdown.Item href="#action/3.1">Indice de Masa Corporal</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Juego Phaser</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4"> Desafio Matemático </NavDropdown.Item>
+                <NavDropdown.Item href="/desafioMatematico"> Desafio Matematico </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                     Separated link
