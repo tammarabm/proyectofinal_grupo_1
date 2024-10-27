@@ -42,11 +42,13 @@ const ProyectoReact = () => {
       const isMultiplication = Math.random() > 0.5;
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
-
-      if (!isMultiplication && num1 < num2) [num1, num2] = [num2, num1];
-      operator = isMultiplication ? '*' : '/';
-      correctAnswer = isMultiplication ? num1 * num2 : Math.floor(num1 / num2);
-      num1 = isMultiplication ? num1 : num1 * num2;
+    
+      if (!isMultiplication) {
+        num1 = num1 * num2; // Asegura que num1 es múltiplo de num2
+      }
+    
+      operator = isMultiplication ? 'x' : '/';
+      correctAnswer = isMultiplication ? num1 * num2 : num1 / num2; 
 
     } else if (nivel === 'avanzado') {
       // Nivel Avanzado: Operaciones con decimales, fracciones y ecuaciones
