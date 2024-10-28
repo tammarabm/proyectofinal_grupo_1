@@ -14,7 +14,7 @@
 .seccion1 h1{
     font-size: 60px;
     padding: 100px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(./public/images/banner1.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(./images/banner1.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

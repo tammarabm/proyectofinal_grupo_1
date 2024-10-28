@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import AboutUs from './components/AboutUs';
 import DesafioMatematico from './components/DesafioMatematico/ProyectoReact';
 import Team from "./data/Collaborators.json";
+import BilleterasVirtuales from './components/BilleterasVirtuales/BilleterasVirtuales';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/aboutUs" element={<AboutUs team= {Team} />} />
         <Route path="/desafioMatematico" element={<DesafioMatematico />} />
+        <Route path="/billeterasVirtuales" element={<BilleterasVirtuales />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
