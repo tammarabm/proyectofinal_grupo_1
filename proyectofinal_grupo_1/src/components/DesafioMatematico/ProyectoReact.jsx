@@ -44,7 +44,7 @@ const ProyectoReact = () => {
       num2 = Math.floor(Math.random() * 10) + 1;
     
       if (!isMultiplication) {
-        num1 = num1 * num2; // Asegura que num1 es múltiplo de num2
+        num1 = num1 * num2;
       }
     
       operator = isMultiplication ? 'x' : '/';
