@@ -7,6 +7,7 @@ import AboutUs from './components/AboutUs';
 import DesafioMatematico from './components/DesafioMatematico/ProyectoReact';
 import Team from "./data/Collaborators.json";
 import BilleterasVirtuales from './components/BilleterasVirtuales/BilleterasVirtuales';
+import Imc from './components/Imc';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/aboutUs" element={<AboutUs team= {Team} />} />
         <Route path="/desafioMatematico" element={<DesafioMatematico />} />
         <Route path="/billeterasVirtuales" element={<BilleterasVirtuales />} />
+        <Route path="/imc" element={<Imc />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
