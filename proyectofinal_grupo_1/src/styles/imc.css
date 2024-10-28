@@ -1,0 +1,90 @@
+.contenedor1 {
+    background-color: #616161;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    padding:20px;
+}
+
+.contenedor2 {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width:100%;
+    max-width: 600px; /* Limitar el ancho máximo */
+    margin: 0 auto; /* Centrará el contenedor */
+}
+
+
+.h1 {
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+    width: auto;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
+.h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.grupo {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input{
+    width: 0 auto;
+    max-width: 600px; /* Esto asegura que los inputs no sean demasiado anchos en pantallas grandes */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin:0px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #fdbd0d;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+button:hover {
+    background-color: #ffd900;
+}
+
+#resultado {
+    margin-top: 20px;
+}
+
+.resultado{
+    font-size: 20px;
+    color: #333;  
+    
+}

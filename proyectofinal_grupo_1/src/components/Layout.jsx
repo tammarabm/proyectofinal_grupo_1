@@ -14,7 +14,7 @@ function Layout(){
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/aboutUs">About Us</Nav.Link>
                 <NavDropdown title="Más" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Indice de Masa Corporal</NavDropdown.Item>
+                <NavDropdown.Item href="/imc">Indice de Masa Corporal</NavDropdown.Item>
                 <NavDropdown.Item href="/billeterasVirtuales">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Juego Phaser</NavDropdown.Item>
                 <NavDropdown.Item href="/desafioMatematico"> Desafio Matematico </NavDropdown.Item>
