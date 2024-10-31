@@ -79,12 +79,9 @@ button:hover {
     background-color: #ffd900;
 }
 
-#resultado {
-    margin-top: 20px;
-}
 
 .resultado{
-    font-size: 20px;
+    font-size: 19px;
     color: #333;  
-    
+    margin-top: 10px;
 }
