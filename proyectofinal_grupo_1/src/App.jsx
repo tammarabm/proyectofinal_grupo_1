@@ -1,4 +1,3 @@
-
 import { Routes, Route } from 'react-router-dom';
 import ErrorPage from './components/ErrorPage';
 import Home from './components/Home';
@@ -8,6 +7,7 @@ import DesafioMatematico from './components/DesafioMatematico/ProyectoReact';
 import Team from "./data/Collaborators.json";
 import BilleterasVirtuales from './components/BilleterasVirtuales/BilleterasVirtuales';
 import Imc from './components/Imc/Imc';
+import JuegoPhaser from './components/JuegoPhaser/JuegoPhaser';
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
         <Route path="/desafioMatematico" element={<DesafioMatematico />} />
         <Route path="/billeterasVirtuales" element={<BilleterasVirtuales />} />
         <Route path="/imc" element={<Imc />} />
+        <Route path='/juegoPhaser' element={<JuegoPhaser />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
