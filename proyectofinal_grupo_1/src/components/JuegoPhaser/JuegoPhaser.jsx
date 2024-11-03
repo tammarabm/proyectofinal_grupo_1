@@ -14,7 +14,7 @@ import Jefe from "./Scenes/Jefe.js";
 function JuegoPhaser() {
     useEffect(() => {
         const Escenas = [Inicio, Escena1, GameOver, Escena2, Escena3, Escena4, Bonustrack, Victory, Top, Jefe];
-        const crearEscena = Scene = new Scene();
+        const crearEscena = Scene => new Scene();
         const iniciarEscena = () => Escenas.map(crearEscena);
 
         let config = {
