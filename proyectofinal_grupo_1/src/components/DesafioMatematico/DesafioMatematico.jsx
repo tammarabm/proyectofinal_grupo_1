@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './DesafioMatematico.css';
 import Card from 'react-bootstrap/Card';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
