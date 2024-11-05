@@ -149,12 +149,19 @@ const ProyectoReact = () => {
     console.log(points);
   };
 
+  const volverInicio = () => {
+    setJuegoTerminado(false);
+    setPoints(0);
+    setRound(0);
+    setGameStarted(false);
+  };
+
   return (
     <div>
       {!gameStarted ? (
         <PantallaInicio startGame={startGame} /> // Pasar la función correctamente
       ) : juegoTerminado ? (
-        <PantallaFinal points={points} resetearJuego={resetearJuego} />
+        <PantallaFinal points={points} resetearJuego={resetearJuego} volverInicio={volverInicio} />
       ) : showResult ? (
         <PantallaResultado isCorrect={isCorrect} nextRound={nextRound} />
       ) : (
