@@ -5,7 +5,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 
-const DesafioMatematico = ({ challenge, verifyAnswer }) => {
+const DesafioMatematico = ({ challenge, verifyAnswer, volverMenu }) => {
   const [userAnswer, setUserAnswer] = useState('');
 
   const handleSubmit = () => {
@@ -36,6 +36,7 @@ const DesafioMatematico = ({ challenge, verifyAnswer }) => {
           </InputGroup>
           <br />
           <Button variant="outline-danger" onClick={handleSubmit}>Verificar resultado</Button>
+          <Button variant="success" onClick={volverMenu}>Volver al Menu</Button>
         </Card.Body>
       </Card>
     </div>
