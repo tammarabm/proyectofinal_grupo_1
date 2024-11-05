@@ -14,7 +14,7 @@ const PantallaFinal = ({ points, resetearJuego, volverInicio}) => {
                             Puntuaje Final: {points}/5
                         </Card.Text>
                         <Button variant="warning" onClick={resetearJuego}>Reiniciar Juego</Button>
-                        <Button variant="warning" onClick={volverInicio}>Inicio</Button>
+                        <Button variant="warning" onClick={volverInicio}>Volver a Inicio</Button>
                     </Card.Body>
                 </Card>
             </div>
