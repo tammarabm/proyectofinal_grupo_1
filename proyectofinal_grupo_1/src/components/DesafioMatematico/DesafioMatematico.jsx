@@ -17,11 +17,17 @@ const DesafioMatematico = ({ challenge, verifyAnswer }) => {
       <Card className="text-center" style={{ width: '25rem' }}>
         <Card.Header as='h6'>Desafio Matematico</Card.Header>
         <Card.Body>
-          <Card.Title as='h3'>Resuelve: {challenge.num1} {challenge.operator} {challenge.num2}</Card.Title>
+          Resuelve: {challenge.operator === '*' ? (
+            <span>
+              {`${challenge.num1[0]}/${challenge.num1[1]} * ${challenge.num2[0]}/${challenge.num2[1]}`} {/* Fraccion */}
+            </span>
+          ) : (
+            `${challenge.num1} ${challenge.operator} ${challenge.num2}` 
+          )} {/* Otras operaciones */}
           <br />
           <InputGroup className="mb-3">
             <Form.Control
-              type="number"
+              type="text" // Es text por la Fraccion 
               placeholder="Respuesta"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}

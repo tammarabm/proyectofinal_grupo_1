@@ -29,30 +29,30 @@ const ProyectoReact = () => {
 
     if (nivel === 'basico') {
       // Nivel Basico: Sumas y restas simples
-      const isAddition = Math.random() > 0.5;
+      const isAddition = Math.random() > 0.5; // Decide aleatoriamente si es suma o resta
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
 
-      if (!isAddition && num1 < num2) [num1, num2] = [num2, num1];
+      if (!isAddition && num1 < num2) [num1, num2] = [num2, num1]; // Asegura que no se reste un número mayor de un menor
       operator = isAddition ? '+' : '-';
-      correctAnswer = isAddition ? num1 + num2 : num1 - num2;
+      correctAnswer = isAddition ? num1 + num2 : num1 - num2; // Respusta
 
     } else if (nivel === 'intermedio') {
       // Nivel Intermedio: Multiplicaciones y divisiones
-      const isMultiplication = Math.random() > 0.5;
+      const isMultiplication = Math.random() > 0.5; // Decide aleatoriamente si es multiplicación o división
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
 
       if (!isMultiplication) {
-        num1 = num1 * num2;
+        num1 = num1 * num2; // Asegura que la división sea exacta
       }
 
       operator = isMultiplication ? 'x' : '/';
-      correctAnswer = isMultiplication ? num1 * num2 : num1 / num2;
+      correctAnswer = isMultiplication ? num1 * num2 : num1 / num2; // Respuesta
 
     } else if (nivel === 'avanzado') {
       // Nivel Avanzado: Operaciones con decimales, fracciones y ecuaciones
-      const tipoOperacion = Math.floor(Math.random() * 1); // 0 = decimales, 1 = fracciones, 2 = ecuaciones
+      const tipoOperacion = Math.floor(Math.random() * 2); // Decide aleatoriamente el tipo de operación
 
       if (tipoOperacion === 0) {
         // Operaciones con Decimales
@@ -60,9 +60,9 @@ const ProyectoReact = () => {
         num1 = parseFloat((Math.random() * 10 + 1).toFixed(2));
         num2 = parseFloat((Math.random() * 10 + 1).toFixed(2));
 
-        if (!isAddition && num1 < num2) [num1, num2] = [num2, num1];
+        if (!isAddition && num1 < num2) [num1, num2] = [num2, num1]; // Asegura que no se reste un número mayor de un menor
         operator = isAddition ? '+' : '-';
-        correctAnswer = parseFloat((isAddition ? num1 + num2 : num1 - num2).toFixed(2));
+        correctAnswer = parseFloat((isAddition ? num1 + num2 : num1 - num2).toFixed(2)); // Respuesta con dos decimales
 
       } else if (tipoOperacion === 1) {
         // Operaciones con Fracciones
@@ -78,10 +78,9 @@ const ProyectoReact = () => {
         ];
 
         operator = '*';
-        correctAnswer = [num1[0] * num2[0], num1[1] * num2[1]];
+        correctAnswer = [num1[0] * num2[0], num1[1] * num2[1]]; // Respuesta
 
-        console.log(`¿Cuánto es ${num1[0]}/${num1[1]} ${operator} ${num2[0]}/${num2[1]}?`); // Prueba 
-      } else if (tipoOperacion === 2){
+      } else if (tipoOperacion === 2) {
         // Ecuaciones
       }
 
@@ -90,10 +89,9 @@ const ProyectoReact = () => {
   };
 
   const verifyAnswer = (userAnswer) => {
+    if (userAnswer === '') return; // Si la respuesta está vacía, no hacer nada
 
-    if (userAnswer === '') return;
-
-    const userAnswerFloat = parseFloat(userAnswer);
+    const userAnswerFloat = parseFloat(userAnswer); // Convierte la respuesta del usuario a número
 
     console.log("Nivel:", nivel);
     console.log("Respuesta correcta:", currentChallenge.correctAnswer);
@@ -101,11 +99,27 @@ const ProyectoReact = () => {
 
     let isCorrectAnswer
 
-    if (nivel === 'avanzado') {
-      const tolerance = 0.01;
-      isCorrectAnswer = Math.abs(userAnswerFloat - currentChallenge.correctAnswer) < tolerance;
+    // Comprobamos si el desafío actual es una fracción
+    if (nivel === 'avanzado' && currentChallenge.operator === '*') {
+      // Convertimos la entrada del usuario
+      const [userNumerator, userDenominator] = userAnswer.split('/').map(Number);
+
+      if (userDenominator === 0) { // Verifica si el denominador es cero
+        setIsCorrect(false);
+        setShowResult(true);
+        return;
+      }
+
+      const correctNumerator = currentChallenge.correctAnswer[0];
+      const correctDenominator = currentChallenge.correctAnswer[1];
+
+      isCorrectAnswer = (userNumerator * correctDenominator === correctNumerator * userDenominator);
     } else {
-      isCorrectAnswer = userAnswerFloat === currentChallenge.correctAnswer;
+      // Verifica la respuesta para otros niveles
+      const userAnswerFloat = parseFloat(userAnswer);
+      isCorrectAnswer = nivel === 'avanzado'
+        ? Math.abs(userAnswerFloat - currentChallenge.correctAnswer) < 0.01  // Para decimales, permite un margen de error
+        : userAnswerFloat === currentChallenge.correctAnswer; // Para los otros niveles, debe ser exacto
     }
 
     if (isCorrectAnswer) {
