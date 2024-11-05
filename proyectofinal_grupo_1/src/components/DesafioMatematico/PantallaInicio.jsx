@@ -1,9 +1,10 @@
 import { Button } from 'react-bootstrap';
-import './PantallaInicio.css'
+import './PantallaInicio.css';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 //disabled 
 function PantallaInicio({ startGame }) {
+
     return (
         <>
             <div className='contenedorinicio'>
@@ -22,7 +23,7 @@ function PantallaInicio({ startGame }) {
                     <Button variant="success" onClick={() => startGame('basico')}>Basico</Button> {' '}
                     <Button variant="warning" onClick={() => startGame('intermedio')}>Intermedio</Button> {' '}
                     <Button variant="danger" onClick={() => startGame('avanzado')}>Avanzado</Button>
-
+                </div>
                 </div>
             </div>
         </>
