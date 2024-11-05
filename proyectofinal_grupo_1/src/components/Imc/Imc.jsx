@@ -35,6 +35,16 @@ function Imc(){
 
             }
         };
+
+        const reiniciar = () => {
+            setNombre('');
+            setApellido('');
+            setAltura('');
+            setPeso('');
+            setNivelPeso('');
+            setImc(null);
+            setResultado(false);
+        };
     
     return (
         <>
@@ -71,6 +81,8 @@ function Imc(){
                             onChange={(e)=>setPeso(e.target.value)}/>
                         </div>
                         <button onClick={calcularImc} >Calcular IMC</button>
+                        <button onClick={reiniciar}>Reiniciar</button>
+                        <button >Sugerencias</button>
                         {resultado ? (
                             <Resultado nombre={nombre} apellido={apellido} imc={imc} nivelPeso={nivelPeso} />
                         ): null
