@@ -42,16 +42,49 @@ const ProyectoReact = () => {
       const isMultiplication = Math.random() > 0.5;
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
-    
+
       if (!isMultiplication) {
         num1 = num1 * num2;
       }
-    
+
       operator = isMultiplication ? 'x' : '/';
-      correctAnswer = isMultiplication ? num1 * num2 : num1 / num2; 
+      correctAnswer = isMultiplication ? num1 * num2 : num1 / num2;
 
     } else if (nivel === 'avanzado') {
       // Nivel Avanzado: Operaciones con decimales, fracciones y ecuaciones
+      const tipoOperacion = Math.floor(Math.random() * 1); // 0 = decimales, 1 = fracciones, 2 = ecuaciones
+
+      if (tipoOperacion === 0) {
+        // Operaciones con Decimales
+        const isAddition = Math.random() > 0.5;
+        num1 = parseFloat((Math.random() * 10 + 1).toFixed(2));
+        num2 = parseFloat((Math.random() * 10 + 1).toFixed(2));
+
+        if (!isAddition && num1 < num2) [num1, num2] = [num2, num1];
+        operator = isAddition ? '+' : '-';
+        correctAnswer = parseFloat((isAddition ? num1 + num2 : num1 - num2).toFixed(2));
+
+      } else if (tipoOperacion === 1) {
+        // Operaciones con Fracciones
+
+        num1 = [
+          Math.floor(Math.random() * 10) + 1, // Numerador 1
+          Math.floor(Math.random() * 10) + 1 // Denominador 1
+        ];
+
+        num2 = [
+          Math.floor(Math.random() * 10) + 1, // Numerador 2
+          Math.floor(Math.random() * 10) + 1 // Denominador 2
+        ];
+
+        operator = '*';
+        correctAnswer = [num1[0] * num2[0], num1[1] * num2[1]];
+
+        console.log(`¿Cuánto es ${num1[0]}/${num1[1]} ${operator} ${num2[0]}/${num2[1]}?`); // Prueba 
+      } else if (tipoOperacion === 2){
+        // Ecuaciones
+      }
+
     }
     setCurrentChallenge({ num1, num2, operator, correctAnswer });
   };
@@ -60,7 +93,22 @@ const ProyectoReact = () => {
 
     if (userAnswer === '') return;
 
-    if (parseInt(userAnswer) === currentChallenge.correctAnswer) {
+    const userAnswerFloat = parseFloat(userAnswer);
+
+    console.log("Nivel:", nivel);
+    console.log("Respuesta correcta:", currentChallenge.correctAnswer);
+    console.log("Respuesta del usuario:", userAnswerFloat);
+
+    let isCorrectAnswer
+
+    if (nivel === 'avanzado') {
+      const tolerance = 0.01;
+      isCorrectAnswer = Math.abs(userAnswerFloat - currentChallenge.correctAnswer) < tolerance;
+    } else {
+      isCorrectAnswer = userAnswerFloat === currentChallenge.correctAnswer;
+    }
+
+    if (isCorrectAnswer) {
       setPoints(points + 1);
       setIsCorrect(true);
     } else {

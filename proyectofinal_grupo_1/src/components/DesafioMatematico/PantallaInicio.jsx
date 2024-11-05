@@ -1,5 +1,7 @@
 import { Button } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
+
+//disabled 
 function PantallaInicio({ startGame }) {
     return (
         <>
@@ -17,7 +19,7 @@ function PantallaInicio({ startGame }) {
                     <h5>¡BUENA SUERTE EN ESTE PEQUEÑO EXAMEN!</h5>
                     <Button variant="success" onClick={() => startGame('basico')}>Basico</Button> {' '}
                     <Button variant="warning" onClick={() => startGame('intermedio')}>Intermedio</Button> {' '}
-                    <Button variant="danger" disabled onClick={() => startGame('avanzado')}>Avanzado</Button>
+                    <Button variant="danger" onClick={() => startGame('avanzado')}>Avanzado</Button>
                 </div>
             </div>
         </>
