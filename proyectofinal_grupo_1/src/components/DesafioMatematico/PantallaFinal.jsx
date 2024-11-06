@@ -1,7 +1,5 @@
 import './PantallaFinal.css';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import PantallaInicio from './PantallaInicio';
+import { Button, Card } from 'react-bootstrap';
 
 const PantallaFinal = ({ points, resetearJuego, volverMenu}) => {
     return (

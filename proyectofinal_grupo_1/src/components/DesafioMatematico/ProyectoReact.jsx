@@ -28,6 +28,7 @@ const ProyectoReact = () => {
     console.log("Menu regresado");
     setGameStarted(false);
     setJuegoTerminado(false);
+    setPoints(0);
   };
 
   const generateChallenge = (nivel) => {
@@ -152,8 +153,11 @@ const ProyectoReact = () => {
     setJuegoTerminado(false);
     setPoints(0);
     setRound(1);
-    console.log(points);
+    generateChallenge(nivel);
+    setShowResult(false);
+    console.log("Puntos Finales: " + points);
   };
+
 
   return (
     <div>

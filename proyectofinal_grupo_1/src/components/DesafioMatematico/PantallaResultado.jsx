@@ -1,5 +1,4 @@
-import Card from 'react-bootstrap/Card';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 const PantallaResultado = ({ isCorrect, nextRound }) => {
   return (
