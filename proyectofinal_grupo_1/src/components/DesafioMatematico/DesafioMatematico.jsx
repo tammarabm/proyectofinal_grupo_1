@@ -2,7 +2,7 @@ import { Button, InputGroup, Form, Card, OverlayTrigger, Tooltip } from 'react-b
 import { useState } from 'react';
 import './DesafioMatematico.css';
 
-const DesafioMatematico = ({ challenge, verifyAnswer }) => {
+const DesafioMatematico = ({ challenge, verifyAnswer, volverMenu }) => {
   const [userAnswer, setUserAnswer] = useState('');
 
   const handleSubmit = () => {
@@ -44,6 +44,7 @@ const DesafioMatematico = ({ challenge, verifyAnswer }) => {
           </OverlayTrigger>
           <br />
           <Button variant="outline-danger" onClick={handleSubmit}>Verificar resultado</Button>
+          <Button variant="success" onClick={volverMenu}>Volver al Menu</Button>
         </Card.Body>
       </Card>
     </div>

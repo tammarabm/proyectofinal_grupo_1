@@ -24,6 +24,13 @@ const ProyectoReact = () => {
     setJuegoTerminado(false);
   };
 
+  const backToMenu = (botonSeleccionado) => {
+    console.log("Menu regresado");
+    setGameStarted(false);
+    setJuegoTerminado(false);
+    setPoints(0);
+  };
+
   const generateChallenge = (nivel) => {
     let num1, num2, operator, correctAnswer;
 
@@ -151,22 +158,17 @@ const ProyectoReact = () => {
     console.log("Puntos Finales: " + points);
   };
 
-  const volverInicio = () => {
-    setJuegoTerminado(false);
-    setPoints(0);
-    setGameStarted(false);
-  };
 
   return (
     <div>
       {!gameStarted ? (
         <PantallaInicio startGame={startGame} /> // Pasar la función correctamente
       ) : juegoTerminado ? (
-        <PantallaFinal points={points} resetearJuego={resetearJuego} volverInicio={volverInicio} />
+        <PantallaFinal points={points} resetearJuego={resetearJuego} volverMenu={backToMenu}/>
       ) : showResult ? (
         <PantallaResultado isCorrect={isCorrect} nextRound={nextRound} />
       ) : (
-        <DesafioMatematico challenge={currentChallenge} verifyAnswer={verifyAnswer} />
+        <DesafioMatematico challenge={currentChallenge} verifyAnswer={verifyAnswer} volverMenu={backToMenu}/>
       )}
     </div>
   );
