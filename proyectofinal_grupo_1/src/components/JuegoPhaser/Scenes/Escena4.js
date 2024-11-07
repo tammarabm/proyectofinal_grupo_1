@@ -31,12 +31,12 @@ class Escena4 extends Phaser.Scene {
     }
     /** Carga de Recursos */
     preload() {
-        this.load.image('background', '/public/resources/img/background2.jpg'); //Fondo del juego
-        this.load.spritesheet('supernave', '/public/resources/img/supernave3.png', { frameWidth: 106.5, frameHeight: 44.5 });
-        this.load.spritesheet('naveEnemiga', '/public/resources/img/enemy3.png', { frameWidth: 90, frameHeight: 49 });
-        this.load.image('bullet', '/public/resources/img/laserBullet.png');
-        this.load.audio('laserSound', '/public/resources/sounds/laserSound.mp3');
-        this.load.audio('shipExplosion', '/public/resources/sounds/shipExplosion.wav');
+        this.load.image('background', '/public/images/background2.jpg'); //Fondo del juego
+        this.load.spritesheet('supernave', '/public/images/supernave3.png', { frameWidth: 106.5, frameHeight: 44.5 });
+        this.load.spritesheet('naveEnemiga', '/public/images/enemy3.png', { frameWidth: 90, frameHeight: 49 });
+        this.load.image('bullet', '/public/images/laserBullet.png');
+        this.load.audio('laserSound', '/public/sounds/laserSound.mp3');
+        this.load.audio('shipExplosion', '/public/sounds/shipExplosion.wav');
     }
     /** Creacion de objetos en el juego */
     create() {

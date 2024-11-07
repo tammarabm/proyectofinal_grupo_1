@@ -25,12 +25,12 @@ class Jefe extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', '/public/resources/img/background2.jpg'); // Fondo del juego
-        this.load.spritesheet('supernave', '/public/resources/img/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveJugador
-        this.load.spritesheet('naveJefe', '/public/resources/img/supernave2-enemiga.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveEnemiga
-        this.load.image('balaJugador', '/public/resources/img/laserBullet-arriba.png');// Bala jugador
-        this.load.image('bullet-enemiga', '/public/resources/img/laserBullet-enemiga-abajo.png'); // Bala enemiga
-        this.load.audio('laserSound', '/public/resources/sounds/laserSound.mp3');
+        this.load.image('background', '/public/images/background2.jpg'); // Fondo del juego
+        this.load.spritesheet('supernave', '/public/images/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveJugador
+        this.load.spritesheet('naveJefe', '/public/images/supernave2-enemiga.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveEnemiga
+        this.load.image('balaJugador', '/public/images/laserBullet-arriba.png');// Bala jugador
+        this.load.image('bullet-enemiga', '/public/images/laserBullet-enemiga-abajo.png'); // Bala enemiga
+        this.load.audio('laserSound', '/public/sounds/laserSound.mp3');
     }
 
     init(data) {

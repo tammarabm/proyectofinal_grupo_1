@@ -13,10 +13,10 @@ class Escena3 extends Phaser.Scene {
         this.nombreJugador = 0;
     }
     preload() { //Carga de recursos
-        this.load.image('background', '/public/resources/img/background2.jpg');// añado el fondo
-        this.load.spritesheet('meteoro', '/public/resources/img/meteoro2.png', { frameWidth: 40, frameHeight: 55.5 });
-        this.load.spritesheet('supernave', '/public/resources/img/supernave.png', { frameWidth: 90, frameHeight: 215 });//width192 & height144
-        this.load.audio('sonido','/public/resources/sounds/sonido.mp3');
+        this.load.image('background', '/public/images/background2.jpg');// añado el fondo
+        this.load.spritesheet('meteoro', '/public/images/meteoro2.png', { frameWidth: 40, frameHeight: 55.5 });
+        this.load.spritesheet('supernave', '/public/images/supernave.png', { frameWidth: 90, frameHeight: 215 });//width192 & height144
+        this.load.audio('sonido','/public/sounds/sonido.mp3');
 
     }
 
