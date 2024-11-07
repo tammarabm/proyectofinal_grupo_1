@@ -1,9 +1,7 @@
 import './PantallaFinal.css';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import PantallaInicio from './PantallaInicio';
+import { Button, Card } from 'react-bootstrap';
 
-const PantallaFinal = ({ points, resetearJuego}) => {
+const PantallaFinal = ({ points, resetearJuego, volverMenu}) => {
     return (
         <div className='contenedorfinal'>
             <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -16,6 +14,7 @@ const PantallaFinal = ({ points, resetearJuego}) => {
                             Puntuaje Final: {points}/5
                         </Card.Text>
                         <Button variant="warning" onClick={resetearJuego}> Reiniciar Juego</Button>
+                        <Button variant="success" onClick={volverMenu}> Volver al Menu</Button>
                     </Card.Body>
                 </Card>
             </div>
