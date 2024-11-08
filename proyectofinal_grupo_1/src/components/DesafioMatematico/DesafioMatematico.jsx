@@ -9,15 +9,24 @@ const DesafioMatematico = ({ challenge, verifyAnswer, volverMenu }) => {
     verifyAnswer(userAnswer);
     setUserAnswer('');
   };
+  // 
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
       <Card className="text-center" style={{ width: '25rem' }}>
         <Card.Header as='h6'>Desafio Matematico</Card.Header>
         <Card.Body>
-          Resuelve: {challenge.operator === '*' ? (
+          Resuelve: {challenge.tipoOperacion === 1 ? (
             <span>
-              {`${challenge.num1[0]}/${challenge.num1[1]} * ${challenge.num2[0]}/${challenge.num2[1]}`} {/* Fraccion */}
+              {`${challenge.num1[0]}/${challenge.num1[1]} ${challenge.operator} ${challenge.num2[0]}/${challenge.num2[1]}`} {/* Fraccion */}
+            </span>
+          ) : challenge.tipoOperacion === 2 ? (
+            <span>
+              {`${challenge.num1} ${challenge.operator} x = ${challenge.num2}`} {/* Ecuacion 1 */}
+            </span>
+          ) : challenge.tipoOperacion === 3 ? (
+            <span>
+              {`${challenge.num1}x ${challenge.operator} ${challenge.num2} = ${challenge.num3}`} {/* Ecuacion 2 */}
             </span>
           ) : (
             `${challenge.num1} ${challenge.operator} ${challenge.num2}`
