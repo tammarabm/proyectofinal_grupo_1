@@ -1,27 +1,28 @@
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-
+import { Navbar, Nav, NavDropdown, Dropdown, Container } from 'react-bootstrap';
+import '../styles/Header.css';
+// justify-content-end
 function Header() {
     return (
         <>
             {/* Header */}
-            <header>
+            <header className='header'>
                 <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                     <Container>
-                        <Navbar.Brand href="/"> <img src="/images/logo2.png" alt="Logo" width="42" height="43" className="d-inline-block align-top" /> <span className="fs-4">GRUPO 1</span></Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <Nav.Link href="/">Home</Nav.Link>
-                                <Nav.Link href="/aboutUs">About Us</Nav.Link>
-                                <NavDropdown title="Más" id="basic-nav-dropdown">
+                        <Navbar.Brand className="logo" href="/">
+                            <img src="/images/logo2.png" alt="Logo" width="45" height="45" />
+                            {' '} <span>GRUPO 1</span>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                        <Navbar.Collapse id="navbar-nav">
+                            <Nav className="d-flex justify-content-end">
+                                <Nav.Link className="nav-link" href="/">Home</Nav.Link>
+                                <Nav.Link className="nav-link" href="/aboutUs">About Us</Nav.Link>
+                                <NavDropdown className="nav-dropdown" title="Proyectos">
+                                    <Dropdown.Header>Nuestros Proyectos</Dropdown.Header>
                                     <NavDropdown.Item href="/imc">Indice de Masa Corporal</NavDropdown.Item>
                                     <NavDropdown.Item href="/billeterasVirtuales">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
                                     <NavDropdown.Item href="/juegoPhaser">Juego Phaser</NavDropdown.Item>
-                                    <NavDropdown.Item href="/desafioMatematico"> Desafio Matematico </NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.4">
-                                        Separated link
-                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/desafioMatematico">Desafio Matematico</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>

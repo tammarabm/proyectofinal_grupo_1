@@ -90,7 +90,7 @@ const ProyectoReact = () => {
         // Ecuaciones: num1 + x = num2 / num1 - x = num2
         const isAddition = Math.random() > 0.5;
         num1 = Math.floor(Math.random() * 10) + 1;
-        const x = Math.floor(Math.random() * 10) + 1;
+        let x = Math.floor(Math.random() * 10) + 1;
        
         if (!isAddition && num1 < x) [num1, x] = [x, num1]; // Asegura que no se reste un número mayor de un menor
         operator = isAddition ? '+' : '-';
@@ -101,7 +101,7 @@ const ProyectoReact = () => {
         // Ecuaciones: num1 * x + num2 = num3
         num1 = Math.floor(Math.random() * 10) + 1;
         num2 = Math.floor(Math.random() * 10) + 1;
-        const x = Math.floor(Math.random() * 5) + 1;
+        let x = Math.floor(Math.random() * 10) + 1;
         num3 = num1 * x + num2;
         operator = '+';
         correctAnswer = (num3 - num2) / num1;
