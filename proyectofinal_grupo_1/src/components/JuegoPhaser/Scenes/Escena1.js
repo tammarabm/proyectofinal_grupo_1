@@ -15,11 +15,11 @@ class Escena1 extends Phaser.Scene {
     }
     /** Carga de Recursos */
     preload() {
-        this.load.image('background', '/public/resources/img/background2.jpg');// añado el fondo
-        this.load.spritesheet('meteoro', '/public/resources/img/meteoro2.png', { frameWidth: 40, frameHeight: 55.5 });
-        this.load.spritesheet('supernave', '/public/resources/img/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144
-        this.load.audio('musica', '/public/resources/sounds/music.mp3');
-        this.load.audio('sonido','/public/resources/sounds/sonido.mp3');
+        this.load.image('background', '/public/images/background2.jpg');// añado el fondo
+        this.load.spritesheet('meteoro', '/public/images/meteoro2.png', { frameWidth: 40, frameHeight: 55.5 });
+        this.load.spritesheet('supernave', '/public/images/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144
+        this.load.audio('musica', '/public/sounds/music.mp3');
+        this.load.audio('sonido','/public/sounds/sonido.mp3');
     }
 
     init(data) {

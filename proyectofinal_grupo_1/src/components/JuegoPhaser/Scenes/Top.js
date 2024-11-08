@@ -10,7 +10,7 @@ class Top extends Phaser.Scene {
         this.puntaje = data.puntaje; //Recibir el puntaje
     }
     preload() {
-        this.load.image('background', '/public/resources/img/background2.jpg');
+        this.load.image('background', '/public/images/background2.jpg');
     }
     create() {
         this.background = this.add.tileSprite(663, 298, 1326, 596, 'background');

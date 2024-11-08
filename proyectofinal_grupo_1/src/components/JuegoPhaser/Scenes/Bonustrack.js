@@ -13,10 +13,10 @@ class Bonustrack extends Phaser.Scene {
     }
     /** Carga de Recursos */
     preload() {
-        this.load.image('background', '/public/resources/img/background2.jpg');
-        this.load.spritesheet('estrella', '/public/resources/img/estrella.png', { frameWidth: 130, frameHeight: 132 });
-        this.load.spritesheet('supernave', '/public/resources/img/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });
-        this.load.audio('bonus','public/resources/sounds/pickupSound.wav');
+        this.load.image('background', '/public/images/background2.jpg');
+        this.load.spritesheet('estrella', '/public/images/estrella.png', { frameWidth: 130, frameHeight: 132 });
+        this.load.spritesheet('supernave', '/public/images/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });
+        this.load.audio('bonus','public/sounds/pickupSound.wav');
     }
 
     init(data) {

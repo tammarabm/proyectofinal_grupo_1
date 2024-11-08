@@ -6,8 +6,8 @@ class Inicio extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', '/public/resources/img/background2.jpg');
-        this.load.image('pressStart', '/public/resources/img/pressStart.png');
+        this.load.image('background', '/public/images/background2.jpg');
+        this.load.image('pressStart', '/public/images/pressStart.png');
     }
 
     create() {
