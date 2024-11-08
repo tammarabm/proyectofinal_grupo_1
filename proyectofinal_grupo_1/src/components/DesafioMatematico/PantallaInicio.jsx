@@ -49,9 +49,9 @@ function PantallaInicio({ startGame }) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-dark text-white">
-                    {nivelSeleccionado === 'basico' && 'Este nivel, incluye operaciones simples como suma y resta'}
-                    {nivelSeleccionado === 'intermedio' && 'Este nivel, incluye operaciones como multiplicacion y division'}
-                    {nivelSeleccionado === 'avanzado' && 'Este nivel, incluye operaciones con decimales, fracciones y ecuaciones'}
+                    {nivelSeleccionado === 'basico' && 'Este nivel incluye operaciones simples de suma y resta'}
+                    {nivelSeleccionado === 'intermedio' && 'Este nivel incluye operaciones de multiplicacion y division'}
+                    {nivelSeleccionado === 'avanzado' && 'Este nivel incluye suma y resta con decimales, multiplicacion de fracciones y ecuaciones. Nota: La linea de la fraccion se realiza presionando "Espacio" '}
                 </Modal.Body>
                 <Modal.Footer className="bg-dark">
                     <Button variant="outline-secondary" onClick={handleStartGame}>Comenzar</Button>
