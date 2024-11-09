@@ -23,6 +23,7 @@ function Header() {
                                     <NavDropdown.Item href="/billeterasVirtuales">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
                                     <NavDropdown.Item href="/juegoPhaser">Juego Phaser</NavDropdown.Item>
                                     <NavDropdown.Item href="/desafioMatematico">Desafio Matematico</NavDropdown.Item>
+                                    <NavDropdown.Item href="/juegoTateti">Juego Tateti</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>
