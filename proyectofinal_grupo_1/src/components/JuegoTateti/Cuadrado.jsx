@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {Button} from 'react-bootstrap'
 
-function Cuadrado({valor, cambiarValorCudrado}){
+function Cuadrado({valor, cambiarValorCuadrado}){
     return (
-        <Button variant="danger" onClick={cambiarValorCudrado}>{valor}</Button>
+        <Button variant="danger" onClick={cambiarValorCuadrado}>{valor}</Button>
 
     )
 }
