@@ -13,28 +13,29 @@ function Tablero() {
                 } else {
                     nuevosValores[i]= "O";
                 }
+                setValores(nuevosValores);
+                setTurnoX(!turnoX);
             };
-            setValores(nuevosValores);
-            setTurnoX(!turnoX);
-
             
-            }
+
             return (
-                <Row xs="auto">
+                <><Row xs="auto">
                     <Cuadrado valor={valores[0]} cambiarValorCuadrado={() => cambiarValorCuadrados(0)} />
                     <Cuadrado valor={valores[1]} cambiarValorCuadrado={() => cambiarValorCuadrados(1)} />
                     <Cuadrado valor={valores[2]} cambiarValorCuadrado={() => cambiarValorCuadrados(2)} />
-                </Row>
-                <Row xs="auto">
-                    <Cuadrado valor={valores[3]} cambiarValorCuadrado={() => cambiarValorCuadrados(3)} />
-                    <Cuadrado valor={valores[4]} cambiarValorCuadrado={() => cambiarValorCuadrados(4)} />
-                    <Cuadrado valor={valores[5]} cambiarValorCuadrado={() => cambiarValorCuadrados(5)} />
-                </Row>
-                <Row xs="auto">
-                    <Cuadrado valor={valores[6]} cambiarValorCuadrado={() => cambiarValorCuadrados(6)} />
-                    <Cuadrado valor={valores[7]} cambiarValorCuadrado={() => cambiarValorCuadrados(7)} />
-                    <Cuadrado valor={valores[8]} cambiarValorCuadrado={() => cambiarValorCuadrados(8)} />
-                </Row>
+                </Row><Row xs="auto">
+                        <Cuadrado valor={valores[3]} cambiarValorCuadrado={() => cambiarValorCuadrados(3)} />
+                        <Cuadrado valor={valores[4]} cambiarValorCuadrado={() => cambiarValorCuadrados(4)} />
+                        <Cuadrado valor={valores[5]} cambiarValorCuadrado={() => cambiarValorCuadrados(5)} />
+                    </Row><Row xs="auto">
+                        <Cuadrado valor={valores[6]} cambiarValorCuadrado={() => cambiarValorCuadrados(6)} />
+                        <Cuadrado valor={valores[7]} cambiarValorCuadrado={() => cambiarValorCuadrados(7)} />
+                        <Cuadrado valor={valores[8]} cambiarValorCuadrado={() => cambiarValorCuadrados(8)} />
+                    </Row></>
             );
+            
+            }
+            
+export default Tablero;
 
 
