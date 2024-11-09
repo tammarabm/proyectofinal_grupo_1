@@ -8,6 +8,7 @@ import Team from "./data/Collaborators.json";
 import BilleterasVirtuales from './components/BilleterasVirtuales/BilleterasVirtuales';
 import Imc from './components/Imc/Imc';
 import JuegoPhaser from './components/JuegoPhaser/JuegoPhaser';
+import Juego from './components/JuegoTateti/Juego'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/billeterasVirtuales" element={<BilleterasVirtuales />} />
         <Route path="/imc" element={<Imc />} />
         <Route path='/juegoPhaser' element={<JuegoPhaser />} />
+        <Route path='/juegoTateti' element={<Juego />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
