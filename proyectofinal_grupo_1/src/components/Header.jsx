@@ -14,10 +14,10 @@ function Header() {
                         </Navbar.Brand>
                         <Navbar.Toggle />
                         <Navbar.Collapse id="navbar-nav">
-                            <Nav className="d-flex justify-content-end">
+                            <Nav className="me-auto">
                                 <Nav.Link className="nav-link" href="/">Home</Nav.Link>
                                 <Nav.Link className="nav-link" href="/aboutUs">About Us</Nav.Link>
-                                <NavDropdown className="nav-dropdown" title="Proyectos">
+                                <NavDropdown id="basic-nav-dropdown" title="Proyectos">
                                     <Dropdown.Header>Nuestros Proyectos</Dropdown.Header>
                                     <NavDropdown.Item href="/imc">Indice de Masa Corporal</NavDropdown.Item>
                                     <NavDropdown.Item href="/billeterasVirtuales">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
