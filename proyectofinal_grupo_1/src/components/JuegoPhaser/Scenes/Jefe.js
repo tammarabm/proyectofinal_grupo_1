@@ -1,5 +1,3 @@
-import Phaser  from "phaser";
-
 class Jefe extends Phaser.Scene {
     constructor() {
         super("Jefe");
@@ -22,15 +20,20 @@ class Jefe extends Phaser.Scene {
         this.puntajeMaximo=0; //Mejor Puntaje
         this.textoPuntaje = 0;
         this.nombreJugador = 0; //Nombre del Jugador
+        this.grupoBotiquines = null; // Grupo de botiquines
+        this.maxVidaBotiquin = 1; // La cantidad de vida que restaura el botiquín
+
     }
 
     preload() {
         this.load.image('background', '/public/images/background2.jpg'); // Fondo del juego
         this.load.spritesheet('supernave', '/public/images/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveJugador
         this.load.spritesheet('naveJefe', '/public/images/supernave2-enemiga.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveEnemiga
+        this.load.spritesheet('naveEnemy', '/public/images/enemy3.png', { frameWidth: 90, frameHeight: 49 });
         this.load.image('balaJugador', '/public/images/laserBullet-arriba.png');// Bala jugador
         this.load.image('bullet-enemiga', '/public/images/laserBullet-enemiga-abajo.png'); // Bala enemiga
         this.load.audio('laserSound', '/public/sounds/laserSound.mp3');
+        this.load.image('botiquin', '/public/images/botiquin.png'); // Imagen del botiquín
     }
 
     init(data) {
@@ -105,7 +108,7 @@ class Jefe extends Phaser.Scene {
 
         // Disparar balas desde el enemigo
         this.time.addEvent({
-            delay: 1000, // Cada segundo
+            delay: 1500, //  Tiempo que el jefe dispara una bala
             callback: this.dispararBalasEnemigo,
             callbackScope: this,
             loop: true
@@ -136,8 +139,23 @@ class Jefe extends Phaser.Scene {
 
         //Muestra Puntaje
         this.textoPuntaje = this.add.text(18, 18, 'Puntaje: 0', { fontSize: '32px', fill: '#fff' });
+
+        // Crear grupo de botiquines
+        this.grupoBotiquines = this.physics.add.group();
+
+        // Crear un evento de tiempo que generará un botiquín cada cierto tiempo
+        this.time.addEvent({
+        delay: Phaser.Math.Between(7000, 15000), // Tiempo aleatorio entre 7 y 15 segundos
+        callback: this.generarBotiquin,
+        callbackScope: this,
+        loop: true
+    });
+
+    // Detectar colisión entre el jugador y los botiquines
+    this.physics.add.overlap(this.jugador, this.grupoBotiquines, this.recogerBotiquin, null, this);
+
     }
-    
+  
     //Balas del jugador con direccion al puntero
     generarBalas() {
         if (this.time.now > this.bulletTime) {
@@ -200,31 +218,10 @@ class Jefe extends Phaser.Scene {
         const rightAngle = angle + Math.PI / 6; // Disparo ligeramente hacia la derecha
         balaDerecha.setVelocity(Math.cos(rightAngle) * velocidad, Math.sin(rightAngle) * velocidad);
     
-        // Opcional: Rotar las balas hacia la dirección en la que están disparando
+        //Rotar las balas hacia la dirección en la que están disparando
         balaCentro.rotation = angle + Math.PI / 2;
         balaIzquierda.rotation = leftAngle + Math.PI / 2;
         balaDerecha.rotation = rightAngle + Math.PI / 2;
-    }
-    
-    // Función para dibujar la barra de vida
-    dibujarBarraVida(barra, x, y, vidaActual, vidaMaxima, color) {
-        // Limpiar gráfico anterior
-        barra.clear();
-
-        // Fondo de la barra
-        barra.fillStyle(0x000000, 0.5); // Negro para el fondo con transparencia
-        barra.fillRect(x, y, this.barraAncho, 20); // Fondo de la barra de vida (ancho: this.barraAncho)
-
-        // Parte de la vida restante, solo si la vida es mayor que 0
-        if (vidaActual > 0) {
-            barra.fillStyle(color); // Color para la vida
-            let porcentajeVida = vidaActual / vidaMaxima;
-            barra.fillRect(x, y, this.barraAncho * porcentajeVida, 20); // Ajustar el ancho según la vida restante
-        }
-
-        // Dibuja el contorno de la barra
-        barra.lineStyle(2, 0xffffff, 1); // Contorno blanco, grosor de 2 píxeles
-        barra.strokeRect(x, y, this.barraAncho, 20); // Dibuja el contorno alrededor de la barra
     }
 
     colisionBalasEnemigas(_enemigo,bala) {
@@ -303,6 +300,51 @@ class Jefe extends Phaser.Scene {
         // Calcular el ángulo entre el enemigo y el jugador
         const angleEnemigo = Math.atan2(directionEnemigoY, directionEnemigoX);
         this.enemigo.rotation = angleEnemigo + Math.PI / 2;
+    }
+
+    generarBotiquin() {
+        // Generar coordenadas aleatorias para el botiquín
+        const x = Phaser.Math.Between(50, 1276); // Dentro del rango del mundo del juego
+        const y = Phaser.Math.Between(50, 500);
+        
+        // Crear el botiquín en esas coordenadas
+        const botiquin = this.grupoBotiquines.create(x, y, 'botiquin');
+        
+        // Establecer propiedades físicas (opcional)
+        botiquin.setCollideWorldBounds(true);
+        botiquin.setBounce(0.5); // Opcional, si quieres que rebote
+    }
+
+    recogerBotiquin(_jugador, botiquin) {
+        // Aumentar la vida del jugador, pero no exceder el máximo de vida
+        this.vidasJugador = Math.min(this.vidasJugador + this.maxVidaBotiquin, this.maxVidasJugador);
+        
+        // Actualizar la barra de vida del jugador
+        this.dibujarBarraVida(this.barraVidaJugador, 20, 555, this.vidasJugador, this.maxVidasJugador, 0x2d8c24);
+        
+        // Destruir el botiquín
+        botiquin.destroy();
+    }
+
+    // Función para dibujar la barra de vida
+    dibujarBarraVida(barra, x, y, vidaActual, vidaMaxima, color) {
+        // Limpiar gráfico anterior
+        barra.clear();
+
+        // Fondo de la barra
+        barra.fillStyle(0x000000, 0.5); // Negro para el fondo con transparencia
+        barra.fillRect(x, y, this.barraAncho, 20); // Fondo de la barra de vida (ancho: this.barraAncho)
+
+        // Parte de la vida restante, solo si la vida es mayor que 0
+        if (vidaActual > 0) {
+            barra.fillStyle(color); // Color para la vida
+            let porcentajeVida = vidaActual / vidaMaxima;
+            barra.fillRect(x, y, this.barraAncho * porcentajeVida, 20); // Ajustar el ancho según la vida restante
+        }
+
+        // Dibuja el contorno de la barra
+        barra.lineStyle(2, 0xffffff, 1); // Contorno blanco, grosor de 2 píxeles
+        barra.strokeRect(x, y, this.barraAncho, 20); // Dibuja el contorno alrededor de la barra
     }
 
     gameOver(_jugador) {

@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Escena1 from "./Scenes/Escena1.js";
 import GameOver from "./Scenes/GameOver.js";
 import Escena2 from "./Scenes/Escena2.js";
@@ -12,8 +12,9 @@ import Top from "./Scenes/Top.js";
 import Jefe from "./Scenes/Jefe.js";
 
 function JuegoPhaser() {
+    const contenedor=useRef(null);
     useEffect(() => {
-        const Escenas = [Inicio, Escena1, GameOver, Escena2, Escena3, Escena4, Bonustrack, Victory, Top, Jefe];
+        const Escenas = [Jefe,Escena1, GameOver, Escena2, Escena3, Escena4, Bonustrack, Victory, Top,Inicio ];
         const crearEscena = Scene => new Scene();
         const iniciarEscena = () => Escenas.map(crearEscena);
 
@@ -21,6 +22,7 @@ function JuegoPhaser() {
             type: Phaser.AUTO,
             width: 1326,
             height: 595,
+            parent:contenedor.current,
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -30,8 +32,14 @@ function JuegoPhaser() {
             },
             scene: iniciarEscena()
         };
-        let game = new Phaser.Game(config);
+        const game = new Phaser.Game(config);
     },[]);
+
+    return(
+        <div ref={contenedor}></div>
+
+
+    );
 };
 
 export default JuegoPhaser;
