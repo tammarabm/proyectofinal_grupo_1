@@ -4,6 +4,7 @@ class Jefe extends Phaser.Scene {
         this.jugador = null;
         this.enemigo = null;
         this.grupoBalas = null;
+        this.grupoNaves = null;
         this.cursors = null;
         this.bulletTime = 0;
         this.grupoBalasEnemigas = null; // Grupo de balas enemigas
@@ -29,7 +30,7 @@ class Jefe extends Phaser.Scene {
         this.load.image('background', '/public/images/background2.jpg'); // Fondo del juego
         this.load.spritesheet('supernave', '/public/images/supernave2.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveJugador
         this.load.spritesheet('naveJefe', '/public/images/supernave2-enemiga.png', { frameWidth: 45, frameHeight: 107.5 });//width192 & height144 NaveEnemiga
-        this.load.spritesheet('naveEnemy', '/public/images/enemy3.png', { frameWidth: 90, frameHeight: 49 });
+        this.load.spritesheet('naveEnemiga', '/public/images/enemy3.png', { frameWidth: 90, frameHeight: 49 });
         this.load.image('balaJugador', '/public/images/laserBullet-arriba.png');// Bala jugador
         this.load.image('bullet-enemiga', '/public/images/laserBullet-enemiga-abajo.png'); // Bala enemiga
         this.load.audio('laserSound', '/public/sounds/laserSound.mp3');
@@ -88,6 +89,15 @@ class Jefe extends Phaser.Scene {
             repeat: 0
         });
 
+        // Animacion Enemy
+        this.anims.create({
+            key: 'enemy_atack',
+            frames: this.anims.generateFrameNumbers('naveEnemiga', { start: 0, end: 14 }),
+            frameRate: 10,
+            repeat: -1
+        })
+
+
         // Controles del jugador
         this.cursors = this.input.keyboard.createCursorKeys(); // Controles
 
@@ -117,6 +127,7 @@ class Jefe extends Phaser.Scene {
         // Colisiones
         this.physics.add.collider(this.enemigo, this.grupoBalas, this.colisionBalasEnemigas, null, this);
         this.physics.add.collider(this.jugador, this.grupoBalasEnemigas, this.colisionBalasJugador, null, this);
+        
 
         // Crear barra de vida del jugador (color verde)
         this.barraVidaJugador = this.add.graphics();
@@ -149,13 +160,82 @@ class Jefe extends Phaser.Scene {
         callback: this.generarBotiquin,
         callbackScope: this,
         loop: true
-    });
+        });
 
-    // Detectar colisión entre el jugador y los botiquines
-    this.physics.add.overlap(this.jugador, this.grupoBotiquines, this.recogerBotiquin, null, this);
+        // Detectar colisión entre el jugador y los botiquines
+        this.physics.add.overlap(this.jugador, this.grupoBotiquines, this.recogerBotiquin, null, this);
 
+        //TIMER
+
+        // Mostrar el temporizador en pantalla (opcional)
+        this.textoTemporizador = this.add.text(1050, 50, 'Tiempo: 10', { fontSize: '32px', fill: '#fff' });
+
+        // Crear el temporizador de 10 segundos
+        this.tiempoRestante = 10; // 10 segundos
+        this.eventoTemporizador = this.time.addEvent({
+            delay: 1000, // 1 segundo
+            callback: this.actualizarTemporizador,
+            callbackScope: this,
+            loop: true
+        });
+
+        //FIN TIMER
+
+        this.grupoNaves = this.physics.add.group(); //Creando el grupo de naves
+        //this.time.addEvent({ delay: 500, callback: this.generarNaves, callbackScope: this, loop: true });
+        
+        //colision
+        this.physics.add.collider(this.jugador, this.grupoNaves, this.colisionJugadorEnemigo, null, this);
+        this.physics.add.collider(this.jugador, this.grupoNaves, this.destruirNave, null, this);
+        this.physics.add.collider(this.grupoNaves, this.grupoBalas, this.colisionJugadorNave, null, this);
+        this.physics.add.collider(this.grupoBalas, this.grupoNaves, this.colisionBalaOvni, null, this);
+    
     }
-  
+    
+    //TIMER
+    actualizarTemporizador() {
+        this.tiempoRestante--;
+        this.textoTemporizador.setText('Tiempo: ' + this.tiempoRestante);
+    
+        if (this.tiempoRestante <= 0) {
+            this.eventoTemporizador.remove(); // Detener el temporizador
+            this.generarEnemigos(); // Llamar a la función para generar enemigos
+            this.textoTemporizador.destroy();
+        }
+    }
+    
+    generarEnemigos() {
+        // Mostrar advertencia de que los enemigos están llegando
+        this.mensajeAdvertencia = this.add.text(663, 150, '¡Cuidado!', { fontSize: '48px', fill: '#ff0000' }).setOrigin(0.5);
+        
+        // Hacer que el texto parpadee usando un tween
+        this.tweens.add({
+            targets: this.mensajeAdvertencia,
+            alpha: 0, // Hacer que el texto desaparezca
+            ease: 'Linear', // Transición lineal
+            duration: 500, // Duración de la transición (0.5 segundos)
+            repeat: -1, // Repetir indefinidamente
+            yoyo: true // Hacer que el tween vuelva al estado original
+        });
+
+        // Eliminar el mensaje después de 3 segundos
+        this.time.delayedCall(3000, () => {
+            this.mensajeAdvertencia.destroy();
+        });
+    
+        this.time.addEvent({ delay: 1000, callback: this.generarNaves, callbackScope: this, loop: true });
+    
+    }
+
+    generarNaves() {
+        const x = Phaser.Math.Between(0, 1326);
+        const naveEnemy = this.grupoNaves.create(x, 0, 'naveEnemiga');
+        naveEnemy.play('enemy_atack');
+        naveEnemy.setVelocityY(200);
+    }
+    
+    //FIN TIMER
+
     //Balas del jugador con direccion al puntero
     generarBalas() {
         if (this.time.now > this.bulletTime) {
@@ -248,6 +328,38 @@ class Jefe extends Phaser.Scene {
             }
         
     }
+
+    //COLISION ENEMIGO
+
+    colisionJugadorEnemigo(_jugador, _naveEnemiga) {
+        console.log('El jugador ha chocado con el enemigo'); // Mensaje en la consola
+    
+        // Reducir la vida del jugador
+        this.vidasJugador--;
+    
+        // Actualizar la barra de vida del jugador
+        this.dibujarBarraVida(this.barraVidaJugador, 20, 555, this.vidasJugador, this.maxVidasJugador, 0x2d8c24); // Verde
+    
+        // Actualizar el texto de vida del jugador
+        this.textoVidaJugador.setText("Vida Jugador: " + this.vidasJugador);
+    
+        console.log('Vidas del jugador:', this.vidasJugador); // Mostrar vidas del jugador
+        
+        _naveEnemiga.destroy(); //destruir la nave cuando el jugador choca
+
+        // Verificar si el jugador ha perdido todas sus vidas
+        if (this.vidasJugador <= 0) {
+            console.log('El jugador ha sido destruido'); // Mensaje en la consola
+            this.gameOver(); // Llamar al método gameOver
+        }
+    }
+    colisionJugadorNave(_naveEnemiga,_balaOvni) {
+        console.log('Jugador disparo ovni'); // Mensaje en la consola
+        _naveEnemiga.destroy(); //destruir la nave cuando el jugador choca
+        _balaOvni.destroy();
+    }
+
+    
 
     update() {
         this.background.tilePositionY -= 2; // Movimiento del fondo
