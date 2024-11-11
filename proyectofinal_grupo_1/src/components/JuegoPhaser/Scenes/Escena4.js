@@ -14,6 +14,7 @@ class Escena4 extends Phaser.Scene {
         this.textoPuntaje = 0;
         this.bulletTime=0;
         this.nombreJugador=0;
+        this.control2 = null;
     }
     /** Metodo para generar naves alrededor del nivel */
     generarNaves() {
@@ -37,6 +38,7 @@ class Escena4 extends Phaser.Scene {
         this.load.image('bullet', '/public/images/laserBullet.png');
         this.load.audio('laserSound', '/public/sounds/laserSound.mp3');
         this.load.audio('shipExplosion', '/public/sounds/shipExplosion.wav');
+        this.load.image('control2', '/public/images/controles2.png');
     }
     /** Creacion de objetos en el juego */
     create() {
@@ -44,6 +46,12 @@ class Escena4 extends Phaser.Scene {
         this.jugador = this.physics.add.sprite(this.posicionNave.x, this.posicionNave.y, 'supernave');
         this.add.text(1050, 18, this.nombreJugador, { fontSize: '32px', fill: '#fff' });
         this.jugador.angle = 90; //Rotar al jugador para que este en posición horizontal
+        this.control2 = this.add.image(663, 298, 'control2').setOrigin(0.5);
+
+        this.time.delayedCall(3000, () => {
+            this.control2.destroy(); // Elimina la imagen después de 3 segundos
+        });
+
 
         //Animacion Supernave
         this.anims.create({

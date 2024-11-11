@@ -23,6 +23,7 @@ class Jefe extends Phaser.Scene {
         this.nombreJugador = 0; //Nombre del Jugador
         this.grupoBotiquines = null; // Grupo de botiquines
         this.maxVidaBotiquin = 1; // La cantidad de vida que restaura el botiquín
+        this.control3 = null;
 
     }
 
@@ -35,6 +36,7 @@ class Jefe extends Phaser.Scene {
         this.load.image('bullet-enemiga', '/public/images/laserBullet-enemiga-abajo.png'); // Bala enemiga
         this.load.audio('laserSound', '/public/sounds/laserSound.mp3');
         this.load.image('botiquin', '/public/images/botiquin.png'); // Imagen del botiquín
+        this.load.image('control3', '/public/images/controles3.png');
     }
 
     init(data) {
@@ -58,6 +60,13 @@ class Jefe extends Phaser.Scene {
         this.enemigo.setCollideWorldBounds(true);
         this.vidasEnemigo = 10; // Crea al enemigo con 10 de vida cuando inicia el escenario
         this.maxVidasEnemigo = 10;
+
+        //Imagen control
+        this.control3 = this.add.image(663, 298, 'control3').setOrigin(0.5);
+
+        this.time.delayedCall(5000, () => {
+            this.control3.destroy(); // Elimina la imagen después de 5 segundos
+        });
 
         // Crear un tween para que el enemigo se mueva de un lado al otro
         this.tweens.add({
