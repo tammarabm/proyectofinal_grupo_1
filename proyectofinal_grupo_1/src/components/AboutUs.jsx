@@ -20,7 +20,7 @@ function AboutUs({ team }) {
                                 <Card.Text>{t.description}</Card.Text>
                             </Card.Body>
                             <Card.Footer>
-                                <small className="text-muted">GitHub</small>
+                            <Card.Link href={t.github}>{t.githubName}</Card.Link>
                             </Card.Footer>
                         </Card>
                     </>

@@ -1,6 +1,6 @@
 import { Navbar, Nav, NavDropdown, Dropdown, Container } from 'react-bootstrap';
 import '../styles/Header.css';
-// justify-content-end
+
 function Header() {
     return (
         <>
@@ -23,6 +23,8 @@ function Header() {
                                     <NavDropdown.Item href="/billeterasVirtuales">Gestor de Transacciones de Billeteras Virtuales</NavDropdown.Item>
                                     <NavDropdown.Item href="/juegoPhaser">Juego Phaser</NavDropdown.Item>
                                     <NavDropdown.Item href="/desafioMatematico">Desafio Matematico</NavDropdown.Item>
+                                    <Dropdown.Divider />
+                                    <Dropdown.Header>Extras</Dropdown.Header>
                                     <NavDropdown.Item href="/juegoTateti">Juego Tateti</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
