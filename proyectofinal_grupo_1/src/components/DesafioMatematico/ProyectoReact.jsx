@@ -5,38 +5,41 @@ import PantallaResultado from './PantallaResultado';
 import PantallaFinal from './PantallaFinal';
 
 const ProyectoReact = () => {
-  const [gameStarted, setGameStarted] = useState(false);
-  const [currentChallenge, setCurrentChallenge] = useState({});
-  const [nivel, setNivel] = useState('basico');
-  const [points, setPoints] = useState(0);
-  const [round, setRound] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false); // Indica si el juego ha comenzado
+  const [currentChallenge, setCurrentChallenge] = useState({}); // Desafio Actual
+  const [nivel, setNivel] = useState('basico'); // Nivel
+  const [points, setPoints] = useState(0); // Puntos
+  const [round, setRound] = useState(0); // Ronda
+  const [showResult, setShowResult] = useState(false); // Resultado
+  const [isCorrect, setIsCorrect] = useState(false); // Respuesta Correcta
+  const [juegoTerminado, setJuegoTerminado] = useState(false); // Indica si el juego ha terminado
 
+   // Inicio del Juego
   const startGame = (nivelSeleccionado) => {
     console.log("Juego iniciado");
     setGameStarted(true);
-    setNivel(nivelSeleccionado);
-    generateChallenge(nivelSeleccionado);
+    setNivel(nivelSeleccionado); // Establece el nivel seleccionado (basico, intermedio, avanzado)
+    generateChallenge(nivelSeleccionado); // Genera el primer desafio segun el nivel
     setPoints(0);
     setRound(1);
     setJuegoTerminado(false);
   };
 
-  const backToMenu = (botonSeleccionado) => {
+  // Vuelve al Menu del Juego
+  const backToMenu = () => {
     console.log("Menu regresado");
     setGameStarted(false);
     setJuegoTerminado(false);
-    setPoints(0);
+    setPoints(0); // Reinicia los puntos
   };
 
+  // Genera los desafios segun el nivel seleccionado
   const generateChallenge = (nivel) => {
     let num1, num2, num3, operator, correctAnswer, tipoOperacion;
 
     if (nivel === 'basico') {
       // Nivel Basico: Sumas y restas simples
-      const isAddition = Math.random() > 0.5; // Decide aleatoriamente si es suma o resta
+      const isAddition = Math.random() > 0.5; // Selecciona aleatoriamente si es suma o resta
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
 
@@ -46,7 +49,7 @@ const ProyectoReact = () => {
 
     } else if (nivel === 'intermedio') {
       // Nivel Intermedio: Multiplicaciones y divisiones
-      const isMultiplication = Math.random() > 0.5; // Decide aleatoriamente si es multiplicación o división
+      const isMultiplication = Math.random() > 0.5; // Selecciona aleatoriamente si es multiplicación o división
       num1 = Math.floor(Math.random() * 10) + 1;
       num2 = Math.floor(Math.random() * 10) + 1;
 
@@ -59,7 +62,7 @@ const ProyectoReact = () => {
 
     } else if (nivel === 'avanzado') {
       // Nivel Avanzado: Operaciones con decimales, fracciones y ecuaciones
-      tipoOperacion = Math.floor(Math.random() * 4); // Decide aleatoriamente el tipo de operación
+      tipoOperacion = Math.floor(Math.random() * 4); // Selecciona aleatoriamente el tipo de operación
 
       if (tipoOperacion === 0) {
         // Operaciones con Decimales
@@ -110,29 +113,31 @@ const ProyectoReact = () => {
     setCurrentChallenge({ num1, num2, num3, operator, correctAnswer, tipoOperacion });
   };
 
+  // Verificadores de respuesta para cada tipo de operación
   const verifyBasicIntermediateAnswer = (userAnswer) => { // Verifica el nivel Basico e Intermedio
     const userAnswerFloat = parseFloat(userAnswer);
     return userAnswerFloat === currentChallenge.correctAnswer;
   };
 
-  const verifyDecimalAnswer = (userAnswer) => { // Verifica Decimales
+  const verifyDecimalAnswer = (userAnswer) => { // Verifica Decimales (Nivel Avanzado)
     const userAnswerFloat = parseFloat(userAnswer);
     return Math.abs(userAnswerFloat - currentChallenge.correctAnswer) < 0.01;
   };
 
-  const verifyFractionAnswer = (userAnswer) => { // Verifica Fracciones
+  const verifyFractionAnswer = (userAnswer) => { // Verifica Fracciones (Nivel Avanzado)
     const [userNumerator, userDenominator] = userAnswer.split('/').map(Number);
     const [correctNumerator, correctDenominator] = currentChallenge.correctAnswer;
     return (userNumerator * correctDenominator) === (correctNumerator * userDenominator);
   };
 
-  const verifyEquiationAnswer = (userAnswer) => { // Verifica Ecuaciones
+  const verifyEquiationAnswer = (userAnswer) => { // Verifica Ecuaciones (Nivel Avanzado)
     const userAnswerFloat = parseFloat(userAnswer);
     return userAnswerFloat === currentChallenge.correctAnswer;
   };
 
+  // Verifica la respuesta del usuario segun el nivel y tipo de operación
   const verifyAnswer = (userAnswer) => {
-    if (userAnswer === '') return; // Si la respuesta está vacía, no hacer nada
+    if (userAnswer === '') return; // Evita verificar si la respuesta esta vacia
 
     let isCorrectAnswer = false;
 
@@ -164,17 +169,19 @@ const ProyectoReact = () => {
 
   };
 
+  // Avanza a la siguiente ronda o muestra la pantalla de fin si se completaron las 5 rondas
   const nextRound = () => {
     if (round < 5) {
       setRound(round + 1);
-      generateChallenge(nivel);
+      generateChallenge(nivel); // Genera un nuevo desafio
       setShowResult(false);
     } else {
       setShowResult(false);
-      setJuegoTerminado(true);
+      setJuegoTerminado(true); // Marca como juego finalizado despues de 5 rondas
     }
   };
 
+  // Reinicia el Juego y regresa a la primera ronda
   const resetearJuego = () => {
     setJuegoTerminado(false);
     setPoints(0);
@@ -188,13 +195,13 @@ const ProyectoReact = () => {
   return (
     <div>
       {!gameStarted ? (
-        <PantallaInicio startGame={startGame} /> // Pasar la función correctamente
+        <PantallaInicio startGame={startGame} /> // Pantalla Inicial
       ) : juegoTerminado ? (
-        <PantallaFinal points={points} resetearJuego={resetearJuego} volverMenu={backToMenu} />
+        <PantallaFinal points={points} resetearJuego={resetearJuego} volverMenu={backToMenu} /> // Pantalla final con los puntos
       ) : showResult ? (
-        <PantallaResultado isCorrect={isCorrect} nextRound={nextRound} />
+        <PantallaResultado isCorrect={isCorrect} nextRound={nextRound} /> // Pantalla de resultado
       ) : (
-        <DesafioMatematico challenge={currentChallenge} verifyAnswer={verifyAnswer} volverMenu={backToMenu} />
+        <DesafioMatematico challenge={currentChallenge} verifyAnswer={verifyAnswer} volverMenu={backToMenu} /> // Pantalla de desafío
       )}
     </div>
   );
