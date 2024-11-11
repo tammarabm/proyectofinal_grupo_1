@@ -1,5 +1,3 @@
-
-
 const Resultado=({nombre, apellido, imc, nivelPeso})=>{
 
     return (
