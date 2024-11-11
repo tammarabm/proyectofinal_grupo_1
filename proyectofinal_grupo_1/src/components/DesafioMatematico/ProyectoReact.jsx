@@ -24,7 +24,7 @@ const ProyectoReact = () => {
     setJuegoTerminado(false);
   };
 
-  const backToMenu = (botonSeleccionado) => {
+  const backToMenu = () => {
     console.log("Menu regresado");
     setGameStarted(false);
     setJuegoTerminado(false);

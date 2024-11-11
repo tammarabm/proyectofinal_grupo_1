@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../../styles/imc.css'
+import './imc.css'
 import { Card, Button, Form, InputGroup } from 'react-bootstrap'
 import Resultado from './Resultado';
 
@@ -11,6 +11,11 @@ function Imc() {
     const [nivelPeso, setNivelPeso] = useState('');
     const [imc, setImc] = useState(null);
     const [resultado, setResultado] = useState(false);
+    const [sugerencia, setSugerencia] = useState('');
+    const [sugerencia1, setSugerencia1] = useState(false);
+    const [sugerencia2, setSugerencia2] = useState(false);
+    const [sugerencia3, setSugerencia3] = useState(false);
+    const [sugerencia4, setSugerencia4] = useState(false);
 
     const calcularImc = () => {
         const alturaFloat = parseFloat(altura);
@@ -23,11 +28,15 @@ function Imc() {
 
             if (resultadoImc < 18.5) {
                 setNivelPeso('Bajo peso');
+                setSugerencia1(true);
             } else if (resultadoImc >= 18.5 && resultadoImc <= 24.9) {
                 setNivelPeso('Saludable');
+                setSugerencia2(true);
             } else if (resultadoImc >= 25.0 && resultadoImc <= 29.9) {
                 setNivelPeso('Sobrepeso');
+                setSugerencia3(true);
             } else {
+                setSugerencia4(true);
                 setNivelPeso('Obesidad');
             }
             setResultado(true);
@@ -43,9 +52,27 @@ function Imc() {
         setAltura('');
         setPeso('');
         setNivelPeso('');
+        setSugerencia('');
+        setSugerencia1(false);
+        setSugerencia2(false);
+        setSugerencia3(false);
+        setSugerencia4(false);
         setImc(null);
         setResultado(false);
     };
+
+    //Estableci esta funcion cb para usar textos siempre y cuando cumplan su estado en las distintas sugerencias
+    const sugerenciaIMC = () => {
+        if (sugerencia1 == true) {
+            setSugerencia('Adopta hábitos saludables de alimentación');
+        } else if (sugerencia2 == true) {
+            setSugerencia('Establece metas pequeñas y alcanzables');
+        } else if (sugerencia3 == true) {
+            setSugerencia('Encuentra una actividad física que disfrutes');
+        } else if (sugerencia4 == true) {
+            setSugerencia('Sé constante y paciente');
+        }
+    }
 
     return (
         <>
@@ -100,9 +127,9 @@ function Imc() {
                             </div>
                             <Button variant="warning" onClick={calcularImc}>Calcular IMC</Button>
                             <Button variant="warning" onClick={reiniciar}>Reiniciar</Button>
-                            <Button variant="warning">Sugerencias</Button>
+                            <Button variant="warning" onClick={sugerenciaIMC}>Sugerencias</Button>
                             {resultado ? (
-                                <Resultado nombre={nombre} apellido={apellido} imc={imc} nivelPeso={nivelPeso} />
+                                <Resultado nombre={nombre} apellido={apellido} imc={imc} nivelPeso={nivelPeso} sugerencia={sugerencia} />
                             ) : null
                             }
                         </Form>

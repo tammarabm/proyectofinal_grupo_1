@@ -59,7 +59,7 @@ const BilleterasVirtuales = () => {
     return (
         <section className="billeteras">
             <section className="contenedor">
-                <form
+                <form className="formulario-billeteras"
                     onSubmit={(e) => {
                         e.preventDefault();
                         agregarCuentas();
