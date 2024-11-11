@@ -1,6 +1,7 @@
 import './PantallaFinal.css';
 import { Button, Card } from 'react-bootstrap';
 
+// Muestra la pantalla final con el puntaje y opciones de reiniciar o volver al menu
 const PantallaFinal = ({ points, resetearJuego, volverMenu}) => {
     return (
         <div className='contenedorfinal'>

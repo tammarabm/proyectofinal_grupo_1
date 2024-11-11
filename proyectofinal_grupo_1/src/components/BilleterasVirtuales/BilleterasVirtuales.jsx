@@ -12,18 +12,21 @@ const BilleterasVirtuales = () => {
 
     const agregarCuentas = () => {
 
-        let cuentasExistentes = cuentas.find(
+        let cuentasExistentes = cuentas.find( // Busca si el usuario y billetera ingresados ya exiten
             (cuenta) => cuenta.usuario === usuario && cuenta.billetera === billetera
         );
 
         if (cuentasExistentes) {
-            cuentasExistentes.transacciones += Number(transaccion);
+            // Si Existe
+            cuentasExistentes.transacciones += Number(transaccion); // Suma las transacciones ingresadas a la cuenta existente
             setCuentas([...cuentas]);
         }
         else {
-            setCuentas([...cuentas, { usuario, billetera, transacciones: Number(transaccion) }]);
+            // Si no Existe
+            setCuentas([...cuentas, { usuario, billetera, transacciones: Number(transaccion) }]); // Crea una nueva cuenta
         }
 
+        // Limpia los campos despues de guardar los datos
         setUsuario("");
         setBilletera("");
         setTransaccion("");
@@ -33,24 +36,28 @@ const BilleterasVirtuales = () => {
 
         const usuariosAgrupados = {};
 
+        // Agrupa las cuentas por usuario
         cuentas.forEach((cuenta) => {
-            if (!usuariosAgrupados[cuenta.usuario]) {
-                usuariosAgrupados[cuenta.usuario] = []
+            if (!usuariosAgrupados[cuenta.usuario]) { // Si el usuario no tiene un array
+                usuariosAgrupados[cuenta.usuario] = [] // Crea un array 
             }
 
-            usuariosAgrupados[cuenta.usuario].push(cuenta);
+            usuariosAgrupados[cuenta.usuario].push(cuenta); // Agrega la cuenta a dicho array
         });
 
+        // Recorre la cuenta de cada usuario y busca la cuenta con mas transacciones
         const resultado = Object.values(usuariosAgrupados).map((cuentasDelUsuario) => {
             let maxTransaccion = cuentasDelUsuario[0];
 
+            // Compara la cantidad de transacciones de la cuenta actual con la cantidad de maxTransaccion
             for (let i = 1; i < cuentasDelUsuario.length; i++) {
+                // Si la cuenta actual tiene mayor numero de trasacciones que maxTransaccion
                 if (cuentasDelUsuario[i].transacciones > maxTransaccion.transacciones) {
-                    maxTransaccion = cuentasDelUsuario[i];
+                    maxTransaccion = cuentasDelUsuario[i]; // Se actualiza maxTransaccion con esa cuenta
                 }
             }
 
-            return maxTransaccion;
+            return maxTransaccion; // Devuelve la cuenta con mas transacciones
         });
 
         setCuentasMasTransacciones(resultado);

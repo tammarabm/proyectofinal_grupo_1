@@ -3,18 +3,20 @@ import { useState } from 'react';
 import './PantallaInicio.css';
 
 function PantallaInicio({ startGame }) {
-    const [show, setShow] = useState(false);
-    const [nivelSeleccionado, setNivelSeleccionado] = useState(''); // Estado para el nivel seleccionado
+    const [show, setShow] = useState(false); // Visibilidad del modal
+    const [nivelSeleccionado, setNivelSeleccionado] = useState(''); // Nivel
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => setShow(false); // Cierra el modal
 
-    const handleShow = (level) => {
+    // Muetra el modal y establece el nivel seleccionado
+    const handleShow = (level) => { 
         setNivelSeleccionado(level); // Establece el nivel
-        setShow(true);
+        setShow(true); // Muestra el modal
     };
 
+    // Inicia el juego segun el nivel seleccionado
     const handleStartGame = () => {
-        startGame(nivelSeleccionado); // Inicia el juego con el nivel seleccionado
+        startGame(nivelSeleccionado);
     };
 
     return (
@@ -39,7 +41,7 @@ function PantallaInicio({ startGame }) {
                 </div>
             </div>
 
-            {/* Muestra información sobre el nivel seleccionado */}
+            {/* Muestra informacion sobre el nivel */}
             <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton className="bg-dark text-white">
                     <Modal.Title>

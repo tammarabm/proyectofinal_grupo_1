@@ -3,19 +3,20 @@ import { useState } from 'react';
 import './DesafioMatematico.css';
 
 const DesafioMatematico = ({ challenge, verifyAnswer, volverMenu }) => {
-  const [userAnswer, setUserAnswer] = useState('');
+  const [userAnswer, setUserAnswer] = useState(''); // Respuesta del usuario
 
+  // Maneja la verificacion de la respuesta
   const handleSubmit = () => {
     verifyAnswer(userAnswer);
     setUserAnswer('');
   };
-  // 
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
       <Card className="text-center" style={{ width: '25rem' }}>
         <Card.Header as='h6'>Desafio Matematico</Card.Header>
         <Card.Body>
+          {/* Muestra el desafío matemático dependiendo del tipo de operación */}
           Resuelve: {challenge.tipoOperacion === 1 ? (
             <span>
               {`${challenge.num1[0]}/${challenge.num1[1]} ${challenge.operator} ${challenge.num2[0]}/${challenge.num2[1]}`} {/* Fraccion */}
@@ -45,14 +46,16 @@ const DesafioMatematico = ({ challenge, verifyAnswer, volverMenu }) => {
                 onKeyDown={(event) => {
                   if (event.key === ' ') {
                     event.preventDefault(); // Evita el espacio
-                    setUserAnswer(userAnswer + '/'); // Agrega /
+                    setUserAnswer(userAnswer + '/'); // Agrega "/" al presionar espacio (para fracciones)
                   }
                 }}
               />
             </InputGroup>
           </OverlayTrigger>
           <br />
+          {/* Boton para verificar la respuesta */}
           <Button variant="outline-danger" onClick={handleSubmit}>Verificar resultado</Button>
+          {/* Boton para volver al inicio */}
           <Button variant="success" onClick={volverMenu}>Volver al Menu</Button>
         </Card.Body>
       </Card>

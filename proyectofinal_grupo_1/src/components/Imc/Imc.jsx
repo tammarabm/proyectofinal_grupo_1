@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../../styles/imc.css'
-import { Card, Button, Form, InputGroup } from 'react-bootstrap'
+import { Card, Button, Form, InputGroup, Alert } from 'react-bootstrap'
 import Resultado from './Resultado';
 import Sugerencia from './Sugerencia';
 
@@ -13,7 +13,8 @@ function Imc() {
     const [nivelPeso, setNivelPeso] = useState('');
     const [imc, setImc] = useState(null);
     const [resultado, setResultado] = useState(false);
-    const [sugerencia, setSugerencia] = useState(false); 
+    const [sugerencia, setSugerencia] = useState(false);
+    const [alert, setAlert] = useState('');
 
     const calcularImc = () => {
         const alturaFloat = parseFloat(altura);
@@ -35,9 +36,11 @@ function Imc() {
             }
             setResultado(true);
             setSugerencia(false)
+            setAlert('')
         } else {
             setResultado(false);
-            alert("Ingresa valores validos");
+            //alert("Ingresa valores validos");
+            setAlert("Ingresa valores validos");
         }
     };
 
@@ -50,15 +53,17 @@ function Imc() {
         setImc(null);
         setResultado(false);
         setSugerencia(false);
+        setAlert('');
     };
 
-    const mostrarSugerencia=()=>{
-        if (resultado){
+    const mostrarSugerencia = () => {
+        if (resultado) {
             setSugerencia(true);
 
         }
-        else{
-            alert("Calcula tu IMC para mostrar tu sugerencia");
+        else {
+            //alert("Calcula tu IMC para mostrar tu sugerencia");
+            setAlert("Calcula tu IMC para mostrar tu sugerencia");
         }
     }
 
@@ -116,6 +121,13 @@ function Imc() {
                             <Button variant="warning" onClick={calcularImc}>Calcular IMC</Button>
                             <Button variant="warning" onClick={reiniciar}>Reiniciar</Button>
                             <Button variant="warning" onClick={mostrarSugerencia}>Sugerencias</Button>
+
+                            {alert && (
+                                <Alert variant="warning" className="mt-3">
+                                    {alert}
+                                </Alert>
+                            )}
+
                             {resultado && !sugerencia ? (
                                 <Resultado nombre={nombre} apellido={apellido} imc={imc} nivelPeso={nivelPeso} />
                             ) : sugerencia ? (
