@@ -11,7 +11,7 @@ const PantallaFinal = ({ points, resetearJuego, volverMenu}) => {
                             JUEGO TERMINADO
                         </Card.Title>
                         <Card.Text as='h6'>
-                            Puntuaje Final: {points}/5
+                            Puntaje Final: {points}/5
                         </Card.Text>
                         <Button variant="warning" onClick={resetearJuego}>Reiniciar Juego</Button>
                         <Button variant="success" onClick={volverMenu}>Volver al Menu</Button>
