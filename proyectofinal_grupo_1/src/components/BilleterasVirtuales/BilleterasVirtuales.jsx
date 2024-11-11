@@ -87,22 +87,26 @@ const BilleterasVirtuales = () => {
 
                 </form>
                 <div className="listas">
-                    <div className="cuenta">
-                        <h4>Listado de Cuentas</h4>
-                        {cuentas.map((cuenta, index) => (
-                            <p className="p" key={index}>
-                                {cuenta.usuario} - {cuenta.billetera}: {cuenta.transacciones} transacciones
-                            </p>
-                        ))}
+                    {/* se crea este div para tratarlo como columna y que pueda acomodar el texto encima de cada lista */}
+                    <div className="column1">
+                        <h4 className="textcomponent">Listado de Cuentas</h4>
+                        <div className="cuenta">
+                            {cuentas.map((cuenta, index) => (
+                                <p className="p" key={index}>
+                                    {cuenta.usuario} - {cuenta.billetera}: {cuenta.transacciones} transacciones
+                                </p>
+                            ))}
+                        </div>
                     </div>
-
-                    <div className="transacciones">
-                        <h4>Maximas Transacciones</h4>
-                        {cuentasMasTransacciones.map((cuenta, index) => (
-                            <p className="p" key={index}>
-                                {cuenta.usuario} - {cuenta.billetera}: {cuenta.transacciones} transacciones
-                            </p>
-                        ))}
+                    <div className="column1">
+                        <h4 className="textcomponent">Maximas Transacciones</h4>
+                        <div className="transacciones">
+                            {cuentasMasTransacciones.map((cuenta, index) => (
+                                <p className="p" key={index}>
+                                    {cuenta.usuario} - {cuenta.billetera}: {cuenta.transacciones} transacciones
+                                </p>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
