@@ -2,6 +2,8 @@ import { useState } from 'react';
 import '../../styles/imc.css'
 import { Card, Button, Form, InputGroup } from 'react-bootstrap'
 import Resultado from './Resultado';
+import Sugerencia from './Sugerencia';
+
 
 function Imc() {
     const [nombre, setNombre] = useState('');
@@ -11,6 +13,7 @@ function Imc() {
     const [nivelPeso, setNivelPeso] = useState('');
     const [imc, setImc] = useState(null);
     const [resultado, setResultado] = useState(false);
+    const [sugerencia, setSugerencia] = useState(false); 
 
     const calcularImc = () => {
         const alturaFloat = parseFloat(altura);
@@ -31,6 +34,7 @@ function Imc() {
                 setNivelPeso('Obesidad');
             }
             setResultado(true);
+            setSugerencia(false)
         } else {
             setResultado(false);
             alert("Ingresa valores validos");
@@ -45,7 +49,18 @@ function Imc() {
         setNivelPeso('');
         setImc(null);
         setResultado(false);
+        setSugerencia(false);
     };
+
+    const mostrarSugerencia=()=>{
+        if (resultado){
+            setSugerencia(true);
+
+        }
+        else{
+            alert("Calcula tu IMC para mostrar tu sugerencia");
+        }
+    }
 
     return (
         <>
@@ -100,11 +115,12 @@ function Imc() {
                             </div>
                             <Button variant="warning" onClick={calcularImc}>Calcular IMC</Button>
                             <Button variant="warning" onClick={reiniciar}>Reiniciar</Button>
-                            <Button variant="warning">Sugerencias</Button>
-                            {resultado ? (
+                            <Button variant="warning" onClick={mostrarSugerencia}>Sugerencias</Button>
+                            {resultado && !sugerencia ? (
                                 <Resultado nombre={nombre} apellido={apellido} imc={imc} nivelPeso={nivelPeso} />
-                            ) : null
-                            }
+                            ) : sugerencia ? (
+                                <Sugerencia nivelPeso={nivelPeso} />
+                            ) : null}
                         </Form>
                     </Card.Body>
                 </Card>

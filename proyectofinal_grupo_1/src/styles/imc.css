@@ -3,12 +3,12 @@
     margin: auto;
     text-align: center;
     width: 100%;
-    padding:20px;
+    padding:18px;
 }
 
 .contenedor2 {
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     text-align: center;
     width:100%;
@@ -75,13 +75,10 @@ Button {
     margin: 4px;
 }
 
-Button:hover {
-    background-color: #ffd900;
-}
 
 
 .resultado{
-    font-size: 19px;
+    font-size: 18px;
     color: #333;  
-    margin-top: 10px;
+    
 }
