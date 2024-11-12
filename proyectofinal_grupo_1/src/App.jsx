@@ -69,3 +69,4 @@ function App() {
 
 /* Exportamos el componente App para que pueda ser utilizado en otras partes del proyecto */
 export default App;
+

@@ -12,10 +12,12 @@ import Top from "./Scenes/Top.js";
 import Jefe from "./Scenes/Jefe.js";
 import './JuegoPhaser.css';  // Si el archivo CSS está en el mismo directorio
 
+
 // Componente del formulario de entrada
 function NombreJugadorForm({ nombreJugador, setNombreJugador, handleStartGame }) {
     return (
-        <div className="nombreForm">
+        <>
+        <div id="nombreForm">
             <input
                 type="text"
                 id="nombreJugador"
@@ -23,10 +25,10 @@ function NombreJugadorForm({ nombreJugador, setNombreJugador, handleStartGame })
                 value={nombreJugador}
                 onChange={(e) => setNombreJugador(e.target.value)}
             />
-            <button id="botonStart" onClick={handleStartGame}>
-                JUGAR
-            </button>
+            <button id="botonStart" onClick={handleStartGame}>JUGAR</button>
         </div>
+            
+        </>
     );
 }
 
@@ -91,8 +93,8 @@ function JuegoPhaser() {
             )}
             {!iniciarJuego && (
                 <div>
-                    <p className="texto-parpadeante">Escribe tu Nombre</p>
-                    <p className="texto-nombre">{nombreJugador}</p>
+                    <p className="texto-parpadeante">JUEGO PHASER</p>
+                    <p className="texto-nombre">¡Hola {nombreJugador}!</p>
                 </div>
             )}
             
