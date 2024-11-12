@@ -1,6 +1,6 @@
 import { Button, InputGroup, Form, Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useState } from 'react';
-import './DesafioMatematico.css';
+
 
 const DesafioMatematico = ({ challenge, verifyAnswer, volverMenu }) => {
   const [userAnswer, setUserAnswer] = useState(''); // Respuesta del usuario

@@ -1,6 +1,6 @@
 import { Button, ListGroup, Modal } from 'react-bootstrap';
 import { useState } from 'react';
-import './PantallaInicio.css';
+import './styles/PantallaInicio.css';
 
 function PantallaInicio({ startGame }) {
     const [show, setShow] = useState(false); // Visibilidad del modal
@@ -21,7 +21,7 @@ function PantallaInicio({ startGame }) {
 
     return (
         <>
-            <div className='contenedorinicio'>
+            <div className='inicioContenedor'>
                 <div className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                     <div className="container text-center text-bg-success p-3">
                         <h1>BIENVENIDOS AL DESAFIO MATEMATICO +-x%</h1>

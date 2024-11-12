@@ -1,4 +1,4 @@
-import '../../styles/imc.css'
+import './styles/imc.css';
 
 const Sugerencia=({nivelPeso})=>{
     

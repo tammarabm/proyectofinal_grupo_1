@@ -10,7 +10,7 @@ import Bonustrack from "./Scenes/Bonustrack.js";
 import Victory from "./Scenes/Victory.js";
 import Top from "./Scenes/Top.js";
 import Jefe from "./Scenes/Jefe.js";
-import './JuegoPhaser.css';  // Si el archivo CSS está en el mismo directorio
+import './styles/JuegoPhaser.css';
 
 
 // Componente del formulario de entrada

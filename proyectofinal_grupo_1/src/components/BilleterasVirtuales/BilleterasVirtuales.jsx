@@ -1,4 +1,4 @@
-import "./BilleterasVirtuales.css"
+import './styles/BilleterasVirtuales.css'
 import { useState } from "react";
 
 const BilleterasVirtuales = () => {
