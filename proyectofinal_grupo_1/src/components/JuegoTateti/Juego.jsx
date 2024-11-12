@@ -1,4 +1,5 @@
 //import Inicio from '../JuegoPhaser/Scenes/Inicio';
+import Inicio from './Inicio';
 import Tablero from './Tablero'
 import { useState, useEffect } from 'react'
 
@@ -12,9 +13,9 @@ function Juego(){
     }
 
     return(
-        <Tablero>
+        <Inicio>
 
-        </Tablero>
+        </Inicio>
     )
 
 } export default Juego;
