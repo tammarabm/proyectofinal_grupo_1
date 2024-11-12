@@ -8,7 +8,7 @@ function PantallaInicio({ startGame }) {
 
     const handleClose = () => setShow(false); // Cierra el modal
 
-    // Muetra el modal y establece el nivel seleccionado
+    // Muestra el modal y establece el nivel seleccionado
     const handleShow = (level) => { 
         setNivelSeleccionado(level); // Establece el nivel
         setShow(true); // Muestra el modal
