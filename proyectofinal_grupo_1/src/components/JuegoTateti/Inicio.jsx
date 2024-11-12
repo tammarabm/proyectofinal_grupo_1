@@ -9,11 +9,11 @@ function Inicio() {
   <div><h1>esto es inicio</h1></div>
 
   return (
-    <div className="contenedorinicio">
+    <div className="containerInicio">
       {juegoComenzado ? (
         <Tablero />
       ) : (
-        <div className="textoBienvenida">
+        <div className="textoInicio">
           <h1>Bienvenido al tateti!</h1>
           <p>
             El objetivo de cada jugador es hacer una linea de tres, ya sea horizontal, vertical o diagonal,

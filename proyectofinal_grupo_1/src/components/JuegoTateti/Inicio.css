@@ -1,4 +1,4 @@
-.contenedorInicio {
+.containerInicio {
     background-image: url('../../images/Tateti.jfif');
     background-position: center;
     background-size: cover;
@@ -10,8 +10,9 @@
     align-items: center;
   }
   
-  .textoBienvenida {
+  .textoInicio {
     text-align: center;
+    color: antiquewhite;
   }
   
   button {
