@@ -1,7 +1,9 @@
 /* Importamos el hook 'useState' desde React para manejar el estado dentro del componente. */
 import { useState } from 'react';
 /* Importamos el archivo css para darle estilo a este componente */
-import '../../styles/imc.css';
+
+import './styles/imc.css';
+
 /*Importamos los componentes necesarios para el ingreso y envío de datos. También para mostrar una alerta */
 import { Card, Button, Form, InputGroup, Alert } from 'react-bootstrap'
 /* Importamos el componente Resultado para mostrar el imc del usuario */

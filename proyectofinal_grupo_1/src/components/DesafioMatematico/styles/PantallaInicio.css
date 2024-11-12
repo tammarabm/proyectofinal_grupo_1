@@ -1,5 +1,5 @@
-.contenedordesafio{
-    background-image: url('../../assets/backgroundPDM.jpg');
+.inicioContenedor{
+    background-image: url('../../../assets/backgroundDM.gif');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

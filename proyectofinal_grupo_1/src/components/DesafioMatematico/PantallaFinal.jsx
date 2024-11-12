@@ -1,4 +1,4 @@
-import './PantallaFinal.css';
+import './styles/PantallaFinal.css';
 import { Button, Card } from 'react-bootstrap';
 
 // Muestra la pantalla final con el puntaje y opciones de reiniciar o volver al menu
