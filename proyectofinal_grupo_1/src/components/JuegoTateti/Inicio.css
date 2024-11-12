@@ -1,6 +1,22 @@
-.contenedorinicio{
+.contenedorInicio {
     background-image: url('../../images/Tateti.jfif');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-}
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .textoBienvenida {
+    text-align: center;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
