@@ -3,6 +3,7 @@
     background-color: black;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     margin: auto;
     text-align: center;
     width: 100%;
