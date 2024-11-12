@@ -44,6 +44,7 @@ function Header() {
                                     <Dropdown.Header>Extras</Dropdown.Header>
                                     {/* Enlace al juego Tateti */}
                                     <NavDropdown.Item href="/juegoTateti">Juego Tateti</NavDropdown.Item>
+                                    <NavDropdown.Item href="/projects">Repositorios</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>

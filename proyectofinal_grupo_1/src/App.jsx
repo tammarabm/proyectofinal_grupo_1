@@ -23,6 +23,10 @@ import JuegoPhaser from './components/JuegoPhaser/JuegoPhaser';
 /* Se importa el componente Juego que nos servirá para mostrar el juego del tateti */
 import Juego from './components/JuegoTateti/Juego'
 
+import Projects from './components/Projects'
+
+import repositorios from './data/Projects.json'
+
 
 /*El componente App sirve para estructurar la aplicación. Aqui se configura, gestionan y organizan los demas componentes que conforman la interfaz de usuario de la aplicación.
 Su rol principal es organizar y renderizar la interfaz de usuario y gestiona el enrutamiento con React Router, mostrando diferentes componentes, basados en la URL, en los lugares adecuados de la interfaz.*/
@@ -56,6 +60,7 @@ function App() {
         {/* Ruta para el juego de Tateti */}
         <Route path='/juegoTateti' element={<Juego />} />
         {/* Ruta para manejar errores, muestra una página de error si la ruta no es válida */}
+        <Route path='/projects' element={<Projects proyectos= {repositorios} />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
