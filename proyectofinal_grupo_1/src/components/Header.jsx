@@ -14,7 +14,7 @@ function Header() {
                 <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
                     {/*Contenedor para centrar y alinear los elementos dentro de la barra */}
                     <Container>
-                         {/* Logo de la página que redirige al inicio */}
+                        {/* Logo de la página que redirige al inicio */}
                         <Navbar.Brand className="logo" href="/">
                             <img src="/images/logo2.png" alt="Logo" width="45" height="45" />
                             {' '} <span>GRUPO 1</span> {/* Nombre del grupo */}
@@ -39,11 +39,14 @@ function Header() {
                                     <NavDropdown.Item href="/juegoPhaser">Juego Phaser</NavDropdown.Item>
                                     {/* Enlace al desafio matematico */}
                                     <NavDropdown.Item href="/desafioMatematico">Desafio Matematico</NavDropdown.Item>
-                                    <Dropdown.Divider />
+                                </NavDropdown>
+                                {/* Menú desplegable para los extras */}
+                                <NavDropdown id="basic-nav-dropdown" title="Mas">
                                     {/* Título para la sección de Extras */}
                                     <Dropdown.Header>Extras</Dropdown.Header>
                                     {/* Enlace al juego Tateti */}
                                     <NavDropdown.Item href="/juegoTateti">Juego Tateti</NavDropdown.Item>
+                                    {/* Enlace a la pagina Projects */}
                                     <NavDropdown.Item href="/projects">Repositorios</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
