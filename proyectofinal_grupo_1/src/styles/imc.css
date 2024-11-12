@@ -1,5 +1,8 @@
 .contenedor1 {
-    background-color: #1d1b1b;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(./images/imc.jpg);
+    background-color: black;
+    background-size: cover;
+    background-position: center;
     margin: auto;
     text-align: center;
     width: 100%;

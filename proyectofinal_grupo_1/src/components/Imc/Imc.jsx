@@ -179,7 +179,7 @@ function Imc() {
                             
                             {/* Dependiendo del estado de 'alert' se renderiza el componente Alert de bootstrap */}
                             {alert && (
-                                <Alert variant="warning" className="mt-3">
+                                <Alert variant="success" className="mt-3">
                                     {alert}
                                 </Alert>
                             )}
