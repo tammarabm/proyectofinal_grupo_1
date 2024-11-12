@@ -18,18 +18,19 @@
     100% {
       background-position: 0 0%; /* Termina en la parte superior */
     }
-  }
+}
 
 /* Texto parpadeante */
 .texto-parpadeante {
-    font-size: 10vh;
+    font-size: 15vh;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: white;
     animation: parpadeo 1s infinite;
     text-align: center;
     margin-top: 20px;  /* Ajusta el margen superior según lo necesites */
 }
 .texto-nombre {
-    font-size: 20vh;
+    font-size: 6vh;
     color: white;
     text-align: center;
     margin-top: 20px;  /* Ajusta el margen superior según lo necesites */
@@ -46,6 +47,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; 
+    width: 30%;
+    
 }
 
 #nombreJugador {
@@ -62,6 +66,8 @@
     color: white;
     border: none;
     border-radius: 5px;
+    margin-top: 10px;
+    width:50%; 
 }
 
 #botonStart:hover {

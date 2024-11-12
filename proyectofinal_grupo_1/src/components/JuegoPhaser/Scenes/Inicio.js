@@ -28,7 +28,6 @@ class Inicio extends Phaser.Scene {
         
         // Agregar un evento de clic para iniciar la escena
         this.input.once('pointerdown', () => {
-             
                 this.scene.start('Escena1'); // Inicia la Escena1 al hacer clic
 
         });
