@@ -1,5 +1,6 @@
 import { Button, Card } from 'react-bootstrap';
 
+// Muestra el resultado de un desafio (correcto o incorrecto)
 const PantallaResultado = ({ isCorrect, nextRound }) => {
   return (
   <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>

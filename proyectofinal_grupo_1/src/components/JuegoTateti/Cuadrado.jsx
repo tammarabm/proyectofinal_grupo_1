@@ -1,9 +1,10 @@
-import { useState } from 'react'
+
 import {Button} from 'react-bootstrap'
+import './styles/cuadrado.css'
 
 function Cuadrado({valor, cambiarValorCuadrado}){
     return (
-        <Button variant="danger" onClick={cambiarValorCuadrado}>{valor}</Button>
+        <button className="cuadrado" onClick={cambiarValorCuadrado}>{valor}</button>
 
     )
 }

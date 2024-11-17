@@ -1,25 +1,27 @@
 import { Button, ListGroup, Modal } from 'react-bootstrap';
 import { useState } from 'react';
-import './PantallaInicio.css';
+import './styles/PantallaInicio.css';
 
 function PantallaInicio({ startGame }) {
-    const [show, setShow] = useState(false);
-    const [nivelSeleccionado, setNivelSeleccionado] = useState(''); // Estado para el nivel seleccionado
+    const [show, setShow] = useState(false); // Visibilidad del modal
+    const [nivelSeleccionado, setNivelSeleccionado] = useState(''); // Nivel
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => setShow(false); // Cierra el modal
 
-    const handleShow = (level) => {
+    // Muestra el modal y establece el nivel seleccionado
+    const handleShow = (level) => { 
         setNivelSeleccionado(level); // Establece el nivel
-        setShow(true);
+        setShow(true); // Muestra el modal
     };
 
+    // Inicia el juego segun el nivel seleccionado
     const handleStartGame = () => {
-        startGame(nivelSeleccionado); // Inicia el juego con el nivel seleccionado
+        startGame(nivelSeleccionado);
     };
 
     return (
         <>
-            <div className='contenedorinicio'>
+            <div className='inicioContenedor'>
                 <div className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                     <div className="container text-center text-bg-success p-3">
                         <h1>BIENVENIDOS AL DESAFIO MATEMATICO +-x%</h1>
@@ -39,7 +41,7 @@ function PantallaInicio({ startGame }) {
                 </div>
             </div>
 
-            {/* Muestra información sobre el nivel seleccionado */}
+            {/* Muestra informacion sobre el nivel */}
             <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton className="bg-dark text-white">
                     <Modal.Title>
