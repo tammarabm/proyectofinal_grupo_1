@@ -12,9 +12,9 @@ const ProyectoReact = () => {
   const [round, setRound] = useState(0); // Ronda
   const [showResult, setShowResult] = useState(false); // Resultado
   const [isCorrect, setIsCorrect] = useState(false); // Respuesta Correcta
-  const [juegoTerminado, setJuegoTerminado] = useState(false); // Indica si el juego ha terminado
+  const [gameOver, setGameOver] = useState(false); // Indica si el juego ha terminado
 
-   // Inicio del Juego
+  // Inicio del Juego
   const startGame = (nivelSeleccionado) => {
     console.log("Juego iniciado");
     setGameStarted(true);
@@ -22,15 +22,57 @@ const ProyectoReact = () => {
     generateChallenge(nivelSeleccionado); // Genera el primer desafio segun el nivel
     setPoints(0);
     setRound(1);
-    setJuegoTerminado(false);
+    setGameOver(false);
   };
 
   // Vuelve al Menu del Juego
   const backToMenu = () => {
     console.log("Menu regresado");
     setGameStarted(false);
-    setJuegoTerminado(false);
+    setGameOver(false);
     setPoints(0); // Reinicia los puntos
+  };
+
+  // Genera la opciones de los desafion
+  const generateOptions = (correctAnswer) => {
+    const options = [];
+    let randomOptions;
+
+    if (Array.isArray(correctAnswer)) {
+      const [numerador, denominador] = correctAnswer; // Correcta: [num, den]
+      options.push(`${numerador}/${denominador}`);
+
+      while (options.length < 3) {
+        // Generar opciones incorrectas cercanas
+        const randomNumerador = numerador + Math.floor(Math.random() * 4 - 1);
+        const randomDenominador = denominador + Math.floor(Math.random() * 4 - 1);
+
+        // Evita que no haya opciones repetidas o invalidas
+        if (randomNumerador > 0 && randomDenominador > 0 && !options.includes(`${randomNumerador}/${randomDenominador}`)) {
+          options.push(`${randomNumerador}/${randomDenominador}`);
+        }
+      }
+
+    } else {
+
+      options.push(correctAnswer);
+      const isCorrectAnswerDecimal = correctAnswer % 1 !== 0; // Verificar si la respuesta correcta es decimal o entero
+
+      while (options.length < 3) { // 1 correcta, 2 incorrectas
+        if (isCorrectAnswerDecimal) {  // Crea respuestas al alzar cercanas a la correcta
+          randomOptions = parseFloat(correctAnswer + (Math.random() * 0.2 - 0.1)).toFixed(2);
+        } else {
+          randomOptions = Math.floor(correctAnswer + Math.random() * 10 - 5)
+        }
+
+        // Evita que no haya opciones repetidas o invalidas
+        if (!options.includes(randomOptions) && randomOptions >= 0) {
+          options.push(randomOptions); // se agrega al array de opciones
+        }
+      }
+    }
+
+    return options.sort(() => Math.random() - 0.5); // Mezcla las opciones
   };
 
   // Genera los desafios segun el nivel seleccionado
@@ -89,17 +131,17 @@ const ProyectoReact = () => {
         operator = '*';
         correctAnswer = [num1[0] * num2[0], num1[1] * num2[1]]; // Respuesta
 
-      } else if (tipoOperacion === 2){
+      } else if (tipoOperacion === 2) {
         // Ecuaciones: num1 + x = num2 / num1 - x = num2
         const isAddition = Math.random() > 0.5;
         num1 = Math.floor(Math.random() * 10) + 1;
         let x = Math.floor(Math.random() * 10) + 1;
-       
+
         if (!isAddition && num1 < x) [num1, x] = [x, num1]; // Asegura que no se reste un número mayor de un menor
         operator = isAddition ? '+' : '-';
         num2 = isAddition ? num1 + x : num1 - x;
         correctAnswer = x;
-      
+
       } else if (tipoOperacion === 3) {
         // Ecuaciones: num1 * x + num2 = num3
         num1 = Math.floor(Math.random() * 10) + 1;
@@ -108,31 +150,11 @@ const ProyectoReact = () => {
         num3 = num1 * x + num2;
         operator = '+';
         correctAnswer = (num3 - num2) / num1;
-      } 
+      }
     }
-    setCurrentChallenge({ num1, num2, num3, operator, correctAnswer, tipoOperacion });
-  };
 
-  // Verificadores de respuesta para cada tipo de operación
-  const verifyBasicIntermediateAnswer = (userAnswer) => { // Verifica el nivel Basico e Intermedio
-    const userAnswerFloat = parseFloat(userAnswer);
-    return userAnswerFloat === currentChallenge.correctAnswer;
-  };
-
-  const verifyDecimalAnswer = (userAnswer) => { // Verifica Decimales (Nivel Avanzado)
-    const userAnswerFloat = parseFloat(userAnswer);
-    return Math.abs(userAnswerFloat - currentChallenge.correctAnswer) < 0.01;
-  };
-
-  const verifyFractionAnswer = (userAnswer) => { // Verifica Fracciones (Nivel Avanzado)
-    const [userNumerator, userDenominator] = userAnswer.split('/').map(Number);
-    const [correctNumerator, correctDenominator] = currentChallenge.correctAnswer;
-    return (userNumerator * correctDenominator) === (correctNumerator * userDenominator);
-  };
-
-  const verifyEquiationAnswer = (userAnswer) => { // Verifica Ecuaciones (Nivel Avanzado)
-    const userAnswerFloat = parseFloat(userAnswer);
-    return userAnswerFloat === currentChallenge.correctAnswer;
+    const options = generateOptions(correctAnswer); // Opciones
+    setCurrentChallenge({ num1, num2, num3, operator, correctAnswer, tipoOperacion, options });
   };
 
   // Verifica la respuesta del usuario segun el nivel y tipo de operación
@@ -140,19 +162,22 @@ const ProyectoReact = () => {
     if (userAnswer === '') return; // Evita verificar si la respuesta esta vacia
 
     let isCorrectAnswer = false;
+    const userAnswerFloat = parseFloat(userAnswer);
 
     if (nivel === 'avanzado') { // Nivel Avanzado
       const tipoOperacion = currentChallenge.tipoOperacion;
       if (tipoOperacion === 0) {
-        isCorrectAnswer = verifyDecimalAnswer(userAnswer);
+        isCorrectAnswer = Math.abs(userAnswerFloat - currentChallenge.correctAnswer) < 0.01; // Decimal
       } else if (tipoOperacion === 1) {
-        isCorrectAnswer = verifyFractionAnswer(userAnswer);
+        const [userNumerator, userDenominator] = userAnswer.split('/').map(Number); // Fracciones
+        const [correctNumerator, correctDenominator] = currentChallenge.correctAnswer;
+        isCorrectAnswer = (userNumerator * correctDenominator) === (correctNumerator * userDenominator);
       } else if (tipoOperacion === 2 || tipoOperacion === 3) {
-        isCorrectAnswer = verifyEquiationAnswer(userAnswer);
+        isCorrectAnswer = userAnswerFloat === currentChallenge.correctAnswer; // Ecuaciones
       }
     }
     else {
-      isCorrectAnswer = verifyBasicIntermediateAnswer(userAnswer); // Niveles Basico e Intermedio
+      isCorrectAnswer = userAnswerFloat === currentChallenge.correctAnswer; // Niveles Basico e Intermedio
     }
 
     if (isCorrectAnswer) {
@@ -177,13 +202,13 @@ const ProyectoReact = () => {
       setShowResult(false);
     } else {
       setShowResult(false);
-      setJuegoTerminado(true); // Marca como juego finalizado despues de 5 rondas
+      setGameOver(true); // Marca como juego finalizado despues de 5 rondas
     }
   };
 
   // Reinicia el Juego y regresa a la primera ronda
-  const resetearJuego = () => {
-    setJuegoTerminado(false);
+  const resetGame = () => {
+    setGameOver(false);
     setPoints(0);
     setRound(1);
     generateChallenge(nivel);
@@ -191,13 +216,12 @@ const ProyectoReact = () => {
     console.log("Puntos Finales: " + points);
   };
 
-
   return (
     <div>
       {!gameStarted ? (
         <PantallaInicio startGame={startGame} /> // Pantalla Inicial
-      ) : juegoTerminado ? (
-        <PantallaFinal points={points} resetearJuego={resetearJuego} volverMenu={backToMenu} /> // Pantalla final con los puntos
+      ) : gameOver ? (
+        <PantallaFinal points={points} resetearJuego={resetGame} volverMenu={backToMenu} /> // Pantalla final con los puntos
       ) : showResult ? (
         <PantallaResultado isCorrect={isCorrect} nextRound={nextRound} /> // Pantalla de resultado
       ) : (
