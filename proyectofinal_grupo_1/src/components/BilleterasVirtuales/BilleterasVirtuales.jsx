@@ -12,19 +12,14 @@ const BilleterasVirtuales = () => {
 
     const agregarCuentas = () => {
 
-        let cuentasExistentes = cuentas.find( // Busca si el usuario y billetera ingresados ya exiten
-            (cuenta) => cuenta.usuario === usuario && cuenta.billetera === billetera
-        );
+        //Con esta validacion nos aseguramos de que retorne el código si no estan completos todos los campos, evitando que se genere una entrada vacia
+        if (!usuario.trim() || !billetera || !transaccion) {
+            alert("Se deben completar todos los campos antes de guardar.");
+            return;
+        }
 
-        if (cuentasExistentes) {
-            // Si Existe
-            cuentasExistentes.transacciones += Number(transaccion); // Suma las transacciones ingresadas a la cuenta existente
-            setCuentas([...cuentas]);
-        }
-        else {
-            // Si no Existe
-            setCuentas([...cuentas, { usuario, billetera, transacciones: Number(transaccion) }]); // Crea una nueva cuenta
-        }
+        //Se guarda la cuenta con todos sus datos
+        setCuentas([...cuentas, { usuario, billetera, transacciones: Number(transaccion) }]);
 
         // Limpia los campos despues de guardar los datos
         setUsuario("");
@@ -33,7 +28,6 @@ const BilleterasVirtuales = () => {
     };
 
     const mostrarTrasacciones = () => {
-
         const usuariosAgrupados = {};
 
         // Agrupa las cuentas por usuario
@@ -43,10 +37,21 @@ const BilleterasVirtuales = () => {
             }
 
             usuariosAgrupados[cuenta.usuario].push(cuenta); // Agrega la cuenta a dicho array
+
+            if (!usuariosAgrupados[cuenta.usuario][cuenta.billetera]) {
+                usuariosAgrupados[cuenta.usuario][cuenta.billetera] = { ...cuenta }; // Si no existe, crea una copia de la cuenta
+            } else {
+                usuariosAgrupados[cuenta.usuario][cuenta.billetera].transacciones += cuenta.transacciones; // Si ya existe, suma las transacciones
+            }
         });
 
+        console.log("usuariosAgrupados:", usuariosAgrupados);
+
         // Recorre la cuenta de cada usuario y busca la cuenta con mas transacciones
-        const resultado = Object.values(usuariosAgrupados).map((cuentasDelUsuario) => {
+        const resultado = Object.values(usuariosAgrupados).map((billeterasPorUsuario) => {
+            const cuentasDelUsuario = Object.values(billeterasPorUsuario);
+            console.log("cuentasDelUsuario:", cuentasDelUsuario);
+
             let maxTransaccion = cuentasDelUsuario[0];
 
             // Compara la cantidad de transacciones de la cuenta actual con la cantidad de maxTransaccion
