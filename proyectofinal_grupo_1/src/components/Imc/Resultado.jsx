@@ -1,4 +1,4 @@
-const Resultado=({nombre, apellido, imc, nivelPeso})=>{
+const Resultado=({nombre, apellido, imc, nivelPeso,sugerencia})=>{
 
     return (
         <>
@@ -7,6 +7,9 @@ const Resultado=({nombre, apellido, imc, nivelPeso})=>{
                 <p>Nombre del paciente: {nombre} {apellido}</p>
                 <p>Tu IMC es: {imc}</p>
                 <p>Tu nivel de peso es: {nivelPeso}</p>
+            </div>
+            <div className="sugerencias">
+                <p>{sugerencia}</p>
             </div>
         </>
     );

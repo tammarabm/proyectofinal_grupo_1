@@ -4,3 +4,18 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.enunciado{
+    position: relative;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+    top: 20px;
+}
+
+.numeros{
+    position: relative;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #0841fc;
+    font-size: 60px;
+    top: 20px;
+}

@@ -9,7 +9,7 @@ function PantallaInicio({ startGame }) {
     const handleClose = () => setShow(false); // Cierra el modal
 
     // Muestra el modal y establece el nivel seleccionado
-    const handleShow = (level) => { 
+    const handleShow = (level) => {
         setNivelSeleccionado(level); // Establece el nivel
         setShow(true); // Muestra el modal
     };
@@ -22,18 +22,13 @@ function PantallaInicio({ startGame }) {
     return (
         <>
             <div className='inicioContenedor'>
+                <div className="text">
+                    <h1>BIENVENIDOS AL DESAFIO MATEMATICO +-x%</h1>
+                </div>
                 <div className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-                    <div className="container text-center text-bg-success p-3">
-                        <h1>BIENVENIDOS AL DESAFIO MATEMATICO +-x%</h1>
-                    </div>
-                    <ul className=" container text-center mt-md-4">
-                        <ListGroup>
-                            <ListGroup.Item variant="success">¡Hola! ¡Esto es un juego de matemáticas para entrenar en el mundo de los números y operaciones donde cada resultado puede ser correcto o incorrecto!</ListGroup.Item>
-                            <ListGroup.Item variant="success">Dependiendo de tus aciertos, acumularás puntaje para saber cuánto sabes en matemáticas!!!</ListGroup.Item>
-                        </ListGroup>
-                    </ul>
-                    <div className="container text-center mt-md-5">
-                        <h5>¡BUENA SUERTE EN ESTE PEQUEÑO EXAMEN!</h5>
+                    <h5 className='subtitulo'>¡BUENA SUERTE EN ESTE PEQUEÑO EXAMEN!</h5>
+
+                    <div className='contenedor-botones'>
                         <Button variant="success" onClick={() => handleShow('basico')}>Basico</Button> {' '}
                         <Button variant="warning" onClick={() => handleShow('intermedio')}>Intermedio</Button> {' '}
                         <Button variant="danger" onClick={() => handleShow('avanzado')}>Avanzado</Button>

@@ -53,11 +53,15 @@ function Imc() {
             /* Se asigna el nivel de peso según el resultado del imc */
             if (resultadoImc < 18.5) {
                 setNivelPeso('Bajo peso');
+                setSugerencia1(true);
             } else if (resultadoImc >= 18.5 && resultadoImc <= 24.9) {
                 setNivelPeso('Saludable');
+                setSugerencia2(true);
             } else if (resultadoImc >= 25.0 && resultadoImc <= 29.9) {
                 setNivelPeso('Sobrepeso');
+                setSugerencia3(true);
             } else {
+                setSugerencia4(true);
                 setNivelPeso('Obesidad');
             }
             /* Se establece el 'resultado' en true para que se pueda mostrar */
@@ -80,6 +84,11 @@ function Imc() {
         setAltura(' ');
         setPeso(' ');
         setNivelPeso('');
+        setSugerencia('');
+        setSugerencia1(false);
+        setSugerencia2(false);
+        setSugerencia3(false);
+        setSugerencia4(false);
         setImc(null);
         setResultado(false);
         setSugerencia(false);
