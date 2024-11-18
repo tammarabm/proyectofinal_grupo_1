@@ -258,7 +258,7 @@ function Imc() {
                                     <InputGroup.Text>Peso:</InputGroup.Text>
                                     <Form.Control
                                         type="number"
-                                        placeholder="Kg" required min="0" max="500"
+                                        placeholder="Kg" required min="10" max="500"
                                         /* El valor actual del campo de texto se vincula al estado 'peso' */
                                         value={peso}
                                         /* Cuando se cambia el valor del input, se llama a controlarPeso  */
