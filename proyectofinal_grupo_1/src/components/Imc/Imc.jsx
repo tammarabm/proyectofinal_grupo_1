@@ -44,7 +44,7 @@ function Imc() {
         const pesoFloat = parseFloat(peso);
 
         /* Valida que los valores de altura y peso sean números validos */
-        if (!isNaN(alturaMetros) && !isNaN(pesoFloat)) {
+        if ((alturaMetros>=0.5 && alturaMetros<=2.5)&& (pesoFloat>=10 && pesoFloat<=500) && nombre.trim()!="" && apellido.trim()!=""){
             /* Calcula el imc con una formula y el resultado tendrá dos decimales */
             const resultadoImc = (pesoFloat / (alturaMetros * alturaMetros)).toFixed(2);
             /* Se asigna el 'resultadoImc' a la variable de estado 'imc', con el set */
@@ -53,11 +53,15 @@ function Imc() {
             /* Se asigna el nivel de peso según el resultado del imc */
             if (resultadoImc < 18.5) {
                 setNivelPeso('Bajo peso');
+                setSugerencia1(true);
             } else if (resultadoImc >= 18.5 && resultadoImc <= 24.9) {
                 setNivelPeso('Saludable');
+                setSugerencia2(true);
             } else if (resultadoImc >= 25.0 && resultadoImc <= 29.9) {
                 setNivelPeso('Sobrepeso');
+                setSugerencia3(true);
             } else {
+                setSugerencia4(true);
                 setNivelPeso('Obesidad');
             }
             /* Se establece el 'resultado' en true para que se pueda mostrar */
@@ -66,9 +70,9 @@ function Imc() {
             setSugerencia(false);
             setAlert('');
         } else {
-            /* Se ejecuta cuando los valores no son números */ 
             /* Se establece el 'resultado' en false para que no se muestre nada */
             setResultado(false);
+            setSugerencia(false);
             //alert("Ingresa valores validos");
             setAlert("Ingresa valores validos");
         }
@@ -77,9 +81,14 @@ function Imc() {
     const reiniciar = () => {
         setNombre('');
         setApellido('');
-        setAltura('');
-        setPeso('');
+        setAltura(' ');
+        setPeso(' ');
         setNivelPeso('');
+        setSugerencia('');
+        setSugerencia1(false);
+        setSugerencia2(false);
+        setSugerencia3(false);
+        setSugerencia4(false);
         setImc(null);
         setResultado(false);
         setSugerencia(false);
@@ -89,15 +98,117 @@ function Imc() {
     /* Función para que muestre las sugerencias sólo si se ha calculado el imc */
     const mostrarSugerencia = () => {
         /* Si el imc ya fue calculado */
-        if (resultado) {
+        if (resultado && nombre && apellido && peso && altura) {
             /* Se establece en true a 'sugerencia' para que se pueda mostrar */
             setSugerencia(true);
         }else{
             /* Si no fue calculado muestra una alerta */
             /* Se asigna a 'alerta' un mensaje */
+            setSugerencia(false);
             setAlert("Calcula tu IMC para mostrar tu sugerencia");
         }
     }
+
+    const controlarAltura = (e) => {
+        const valor= e.target.value;
+
+        if (valor===""){
+            setAltura("");
+            setAlert("");
+            return;
+        }
+        if (valor.startsWith("-")) {
+            setAlert("La altura no puede ser negativa.");
+            return;
+        }
+        if (valor.includes(".") || valor.includes(",")) {
+            setAlert("La altura no puede contener puntos o comas.");
+            return;
+        }   
+        if ((valor.length)> 3) {
+            setAlert("Solo se permiten hasta 3 dígitos.");
+            return; 
+        }
+        if(valor>250 || valor< 50){
+            setAlert("La altura debe debe estar entre 50 y 250. ")
+        }else{
+            setAlert("")
+        }
+        setAltura(valor);         
+    }  
+    
+    const controlarPeso = (e) => {
+        const valor= e.target.value;
+
+        if (valor===""){
+            setPeso("");
+            setAlert("");
+            return;
+        }
+
+        if ((valor.length > 3)) {
+            setAlert("Solo se permiten hasta 3 dígitos.");
+            return; 
+        }
+        if (valor.startsWith("-")) {
+            setAlert("El peso no puede ser negativo.");
+            return;
+        }
+        if (valor.includes(".") || valor.includes(",")) {
+            setAlert("El peso no puede contener puntos o comas.");
+            return;
+    }
+        if(valor>500 || valor <10){
+            setAlert("El peso debe estar entre 10 a 500. ")
+        }else{
+            setAlert("")
+        }
+        setPeso(valor);         
+    }
+
+    const verificarPalabra = (palabra) => {
+        for (let i = 0; i < palabra.length; i++) {
+            const char = palabra.charAt(i);
+            if (!(char >= 'A' && char <= 'Z') && !(char >= 'a' && char <= 'z') && char !==' ') {
+                return false;
+            }
+        }
+        return true; 
+        };
+
+    const controlarNombre = (e) => {
+        const valor = e.target.value;
+
+        if (valor === "") {
+            setNombre("");
+            setAlert("El campo no puede estar vacío o contener solo espacios.");
+            return;
+        }
+
+        if (!verificarPalabra(valor)) {
+            setAlert("El nombre debe contener solo letras.");
+            return; 
+        }
+        setAlert(""); 
+        setNombre(valor);
+    };
+
+    const controlarApellido = (e) => {
+        const valor = e.target.value;
+
+        if (valor === "") {
+            setApellido("");
+            setAlert("El campo no puede estar vacío o contener solo espacios.");
+            return;
+        }
+
+        if (!verificarPalabra(valor)) {
+            setAlert("El apellido debe contener solo letras.");
+            return; 
+        }
+        setAlert(""); 
+        setApellido(valor);
+    };
 
     return (
         <>  
@@ -120,8 +231,8 @@ function Imc() {
                                         placeholder="Nombre" required
                                         /* El valor actual del campo de texto se vincula al estado 'nombre' */
                                         value={nombre}
-                                        /* Cuando se cambia el valor del input, setNombre toma el valor actual del input  */
-                                        onChange={(e) => setNombre(e.target.value)}
+                                        /* Cuando se cambia el valor del input, se llama a controlarNombre  */
+                                        onChange={controlarNombre}
                                     />
                                     {/* Input para el apellido */}
                                     <InputGroup.Text>Apellido:</InputGroup.Text>
@@ -130,8 +241,8 @@ function Imc() {
                                         placeholder="Apellido" required
                                         /* El valor actual del campo de texto se vincula al estado 'apellido' */
                                         value={apellido}
-                                        /* Cuando se cambia el valor del input, setApellido captura el valor actual del input */
-                                        onChange={(e) => setApellido(e.target.value)}
+                                        /* Cuando se cambia el valor del input, se llama a controlarApellido */
+                                        onChange={controlarApellido}
                                     />
                                 </InputGroup>
                             </div>
@@ -140,12 +251,12 @@ function Imc() {
                                     {/* Input para la altura */}
                                     <InputGroup.Text>Altura:</InputGroup.Text>
                                     <Form.Control
-                                        type="text"
-                                        placeholder="cm" required min="0" max="3"
+                                        type="number"
+                                        placeholder="cm" required min="0" max="250"
                                         /* El valor actual del campo de texto se vincula al estado 'altura' */
                                         value={altura}
-                                        /* Cuando se cambia el valor del input, setAltura captura el valor actual del input  */
-                                        onChange={(e) => setAltura(e.target.value)}
+                                        /* Cuando se cambia el valor del input, se llama a controlarAltura  */
+                                        onChange={controlarAltura}
                                     />
                                     <InputGroup.Text>cm</InputGroup.Text>
                                 </InputGroup>
@@ -155,12 +266,12 @@ function Imc() {
                                     {/* Input para el peso */}
                                     <InputGroup.Text>Peso:</InputGroup.Text>
                                     <Form.Control
-                                        type="text"
-                                        placeholder="Kg" required min="0" max="3"
+                                        type="number"
+                                        placeholder="Kg" required min="10" max="500"
                                         /* El valor actual del campo de texto se vincula al estado 'peso' */
                                         value={peso}
-                                        /* Cuando se cambia el valor del input, setPeso toma el valor actual del input  */
-                                        onChange={(e) => setPeso(e.target.value)}
+                                        /* Cuando se cambia el valor del input, se llama a controlarPeso  */
+                                        onChange={controlarPeso}
                                     />
                                     <InputGroup.Text>kg</InputGroup.Text>
                                 </InputGroup>

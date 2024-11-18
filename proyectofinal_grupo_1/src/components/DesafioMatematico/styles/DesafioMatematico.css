@@ -55,4 +55,18 @@
 .opciones button:active {
     transform: scale(1.05);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+.enunciado{
+    position: relative;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+    top: 20px;
+}
+
+.numeros{
+    position: relative;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #0841fc;
+    font-size: 60px;
+    top: 20px;
 }
